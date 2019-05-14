@@ -1,5 +1,7 @@
 {
   "name": "4Gamers2Gamers",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
