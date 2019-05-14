@@ -1,1 +1,47 @@
+ion-content{
+  width: 100%;
+  height: 100%;
+}
 
+#cover-image{
+  width: 100%;
+  height: 30%;
+  z-index: -1;
+  border-bottom: 2px solid black;
+}
+
+ion-avatar{
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  border: 5px solid #0BD0E8	;
+  background-color: white;
+}
+
+#player-name{
+  position: absolute;
+  top: 40%;
+  left: 20%;
+}
+
+.action-div{
+  position: relative;
+  top: 15%;
+  border-bottom: 2px solid black;
+}
+
+ion-card{
+  width: 100%;
+}
+
+.games-div{
+  position: relative;
+  top: 16%;
+}
+
+#game-title{
+  position: absolute;
+  left: 5px;
+}

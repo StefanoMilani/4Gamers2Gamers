@@ -7,16 +7,54 @@
 </ion-header>
 
 <ion-content >
+
+  <!-- Profile image -->
+  <ion-avatar>
+    <ion-img id="profile-image" src="../assets/img/icon.png"></ion-img>
+  </ion-avatar>
+  <!-- Cover image -->
+  <ion-img id="cover-image" src="../assets/img/cover.jpg"></ion-img>
+  <!-- Player name -->
+  <ion-label id="player-name">Player Name</ion-label>
+  <!-- Button -->
   <ion-fab  vertical="top" horizontal="end" slot="fixed" >
-    <ion-fab-button translucent="true">
+    <ion-fab-button color="secondary" size="small">
       <ion-icon name="settings"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button>
+    <ion-fab-button color="secondary" size="small">
       <ion-icon name="calendar"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button>
+    <ion-fab-button color="secondary" size="small">
       <ion-icon name="people"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <!-- Actions -->
+  <div class="action-div">
+
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <ion-item detail="true">
+            Create a team.
+          </ion-item>
+          <ion-item detail="true">
+            Search for a Team.
+          </ion-item>
+          <ion-item detail="true">
+            Search for a F/A.
+          </ion-item>
+          <ion-item detail="true">
+            Plan a event
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <!-- Games -->
+  <div class="games-div">
+    <ion-label id="game-title">Games</ion-label>
+    <!-- TODO: Add game db with images-->
+  </div>
+
 
 </ion-content>
