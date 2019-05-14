@@ -1,18 +1,55 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Home
+      4Gamers2Gamers
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- SearchBox -->
+<ion-searchbar #searchBox (ionCancel)="cancel()" (ionChange)="search(searchBox.value)" animated
+               cancelButtonText="Cancel"
+               debounce="500" placeholder="Search Games, Players, Teams by name"
+               showCancelButton>
+</ion-searchbar>
+
+<!-- Main content -->
 <ion-content>
-    <ion-card class="welcome-card">
-      <ion-card-header>
-        <ion-card-title>TAB1</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Hello, tab1!</p>
-      </ion-card-content>
-    </ion-card>
+  <ion-grid style="height: 100%">
+    <ion-row>
+     <ion-card>
+       <ion-card-header>
+         <ion-card-title>Search a Player</ion-card-title>
+       </ion-card-header>
+       <ion-card-content>
+         Search new player, filtering them by game, skills and more!
+       </ion-card-content>
+     </ion-card>
+    </ion-row>
+    <ion-row>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Search a Team</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Search new team!
+          Join them or find new challenges
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-row>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Search a Event</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Don't be afraid!
+          Test your ability in the new events.
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<!-- Search result -->
+<!-- TODO -->
