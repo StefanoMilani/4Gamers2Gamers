@@ -8,16 +8,17 @@
 
 <ion-content >
 
+
+  <!-- Cover image -->
+  <ion-img id="cover-image" src="../assets/img/cover.jpg"></ion-img>
   <!-- Profile image -->
   <ion-avatar>
     <ion-img id="profile-image" src="../assets/img/icon.png"></ion-img>
   </ion-avatar>
-  <!-- Cover image -->
-  <ion-img id="cover-image" src="../assets/img/cover.jpg"></ion-img>
   <!-- Player name -->
   <ion-label id="player-name">Player Name</ion-label>
   <!-- Button -->
-  <ion-fab  vertical="top" horizontal="end" slot="fixed" >
+  <ion-fab horizontal="end" vertical="top">
     <ion-fab-button color="secondary" size="small">
       <ion-icon name="settings"></ion-icon>
     </ion-fab-button>
@@ -52,7 +53,10 @@
   </div>
   <!-- Games -->
   <div class="games-div">
-    <ion-label id="game-title">Games</ion-label>
+    <ion-chip id="games-chip">
+      <ion-icon name="logo-game-controller-a"></ion-icon>
+      <ion-label id="game-title">Games</ion-label>
+    </ion-chip>
     <!-- TODO: Add game db with images-->
   </div>
 

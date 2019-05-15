@@ -13,35 +13,34 @@ ion-content{
 ion-avatar{
   height: 100px;
   width: 100px;
-  position: absolute;
+  position: relative;
   left: 20%;
-  top: 20%;
+  top: -10%;
   border: 5px solid #0BD0E8	;
   background-color: white;
 }
 
 #player-name{
-  position: absolute;
-  top: 40%;
+  position: relative;
+  font-size: 25px;
+  top: -40px;
   left: 20%;
 }
 
 .action-div{
   position: relative;
-  top: 15%;
   border-bottom: 2px solid black;
 }
 
 ion-card{
-  width: 100%;
+  width: 90%;
 }
 
 .games-div{
   position: relative;
-  top: 16%;
 }
 
-#game-title{
-  position: absolute;
-  left: 5px;
+#games-chip{
+  position: relative;
+  top: 4px;
 }
