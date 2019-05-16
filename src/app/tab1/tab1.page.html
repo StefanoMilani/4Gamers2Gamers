@@ -14,7 +14,7 @@
 </ion-searchbar>
 
 <!-- Main content -->
-<ion-content>
+<ion-content *ngIf="!displaySearch">
   <ion-grid style="height: 100%">
     <ion-row>
      <ion-card>
@@ -52,4 +52,25 @@
 </ion-content>
 
 <!-- Search result -->
-<!-- TODO:  Add user db to make search-->
+<ion-content *ngIf="displaySearch">
+  <!-- User list -->
+  <ion-label *ngIf="usersSearch.length === 0" class="no-item-to-display">
+    No gamer to display.
+  </ion-label>
+  <ion-list *ngIf="usersSearch.length > 0">
+    <ion-list-header>
+      <ion-label class="list-header">Gamers</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let user of usersSearch">
+      <!-- TODO: Add link to user profile-->
+      <ion-avatar class="user-avatar">
+        <ion-img src="../assets/img/icon.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="user-nick">{{ user.nickname }}</ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- Team list -->
+  <!-- TODO: add team list -->
+  <!-- Event list -->
+  <!-- TODO: add event list -->
+</ion-content>

@@ -16,7 +16,7 @@ export class InMemoryDataService implements InMemoryDbService{
   }
 
   createDb() {
-    const user = [
+    const users = [
       { id: 11, nickname: 'Mr. Nice' },
       { id: 12, nickname: 'Narco' },
       { id: 13, nickname: 'Bombasto' },
@@ -28,6 +28,11 @@ export class InMemoryDataService implements InMemoryDbService{
       { id: 19, nickname: 'Magma' },
       { id: 20, nickname: 'Tornado' }
     ];
-    return user;
+    const games = [
+      { name: 'Fifa19'},
+      {name: 'Call of Duty'}
+    ];
+    return {users, games};
   }
+
 }
