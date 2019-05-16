@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Options -->
+  <ion-list>
+    <ion-item>
+      <ion-label>Edit nickname:</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item detail="true">
+      <ion-label>Edit profile pic:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Edit country:</ion-label>
+      <ion-button (click)="openPicker()">Choose</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Edit email:</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Change password:</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+  </ion-list>
+  <!-- Save changed button -->
+  <ion-button size="large" expand="block" shape="round"
+              strong="true" color="success"
+              (click)="saveAlertMethod()">
+    Save Changes
+  </ion-button>
+  <!-- Delete account action -->
+  <div id="delete-div">
+    <div>
+      <ion-chip color="danger">
+        <ion-icon name="alert"></ion-icon>
+        <ion-label>You are entering the DANGEROUS zone</ion-label>
+      </ion-chip>
+    </div>
+    <ion-button color="danger" size="small"
+                (click)="deleteAlertMethod()">
+      Delete Account
+    </ion-button>
+  </div>
+  <!-- Logout action -->
+  <div class="logout-div">
+    <div>
+      <ion-chip color="warning">
+        <ion-icon name="sad"></ion-icon>
+        <ion-label>Do not do it, you are making us sad!</ion-label>
+      </ion-chip>
+    </div>
+    <ion-button color="warning" size="small"
+                (click)="logoutAlertMethod()">
+      Logout
+    </ion-button>
+  </div>
+</ion-content>
