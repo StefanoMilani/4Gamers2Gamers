@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { User } from './user';
-import { HttpClient  } from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {User} from './user';
+import {HttpClient} from '@angular/common/http';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,34 +12,20 @@ export class UserService {
   // Constructor
   constructor( private http: HttpClient ) { }
   // Get the list of users
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl).pipe(
-        catchError(this.handleError<User[]>('getUsers', []))
-    );
+  async getUsers(): Promise<User[]> {
+    return await this.http.get<User[]>(this.usersUrl).toPromise();
   }
   // Get user by id
-  getUser(id: number): Observable<User> {
+  async getUser(id: number): Promise<User> {
     const url = `${this.usersUrl}/${id}`;
-    return this.http.get(url).pipe(this.handleError<User>(`getUser id=${id}`));
+    return this.http.get<User>(url).toPromise();
   }
   // Get users whose nickname contains tem
-  searchUsers(term: string): Observable<User[]> {
+  async searchUsers(term: string): Promise<User[]> {
     if (!term.trim()) {
-      return of ([]);
+      return of ([]).toPromise();
     }
-    return this.http.get<User[]>(`${this.usersUrl}/?nickname=${term}`).pipe(
-        catchError(this.handleError<User[]>('searchUsers', []))
-    );
+    return this.http.get<User[]>(`${this.usersUrl}/?nickname=${term}`).toPromise();
   }
 
-  // MARK: Private methods
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // Print error in the console
-      console.error(error);
-      console.error(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
 }

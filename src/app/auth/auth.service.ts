@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UserService} from '../user.service';
 import {User} from '../user';
-import {Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,43 +10,53 @@ import {catchError} from 'rxjs/operators';
 export class AuthService {
   // MARK: Properties
   private userUrl = 'api/users';
+  private currentUrl = 'api/currentUser';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   // Constructor
   constructor(private http: HttpClient,
-              private userService: UserService
+              private userService: UserService,
+              private router: Router
   ) { }
 
   // Register new user
-  registerUser(user: User): Observable<User> {
-    console.log(user);
-    return this.http.post<User>(this.userUrl, user, this.httpOptions).pipe(
-        catchError(this.handleError<User>('registerUser'))
-    );
+  async registerUser(user: User): Promise<User> {
+    return await this.http.post<User>(this.userUrl, user, this.httpOptions).toPromise();
   }
   // Login
-  login(user: User): Observable<User[]> {
-    return this.userService.searchUsers(user.nickname);
+  async login(user: User): Promise<User[]> {
+    return await this.userService.searchUsers(user.nickname);
   }
   // Delete user
-  deleteUser(user: User): Observable<User> {
+  async deleteUser(user: User) {
     const id = typeof user === 'number' ? user : user.id;
     const url = `${this.userUrl}/${id}`;
+    await this.http.delete<User>(url, this.httpOptions).toPromise();
+    await this.router.navigate(['']);
+  }
+  // MARK: Current user methods
+  // Set current user
+  async setCurrentUser(user: User) {
+    return await this.http.post<User[]>(this.currentUrl , user , this.httpOptions).toPromise();
+  }
+  // Delete current user
+  async deleteCurrentUser(user: User) {
+    const id = typeof user === 'number' ? user : user.id;
+    const url = `${this.currentUrl}/${id}`;
+    await this.http.delete(url, this.httpOptions).toPromise();
+    await this.router.navigate(['']);
+  }
+  // Check and retrieve current user
+  async checkLogin(): Promise<User> {
+    const users = await this.http.get<User[]>(this.currentUrl).toPromise();
+    console.log(users[0]);
+    if (users.length === 0) {
+      await this.router.navigate(['']);
+    } else {
+      return users.pop();
+    }
+  }
 
-    return this.http.delete<User>(url, this.httpOptions).pipe(
-        catchError(this.handleError<User>(`deleteUser id=${id}`))
-    );
-  }
-  // MARK: Private methods
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // Print error in the console
-      console.error(error);
-      console.error(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
 }
 

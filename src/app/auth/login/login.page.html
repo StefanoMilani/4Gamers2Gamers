@@ -1,16 +1,14 @@
 <ion-content>
-  <ion-item *ngIf="passWrong" color="danger">
-    The password and the confirmation are not the same!
+  <ion-item *ngIf="wrong" color="danger">
+    Wrong nickname or password!
   </ion-item>
-  <ion-item *ngIf="nickWrong" color="danger">
-    This nickname is already taken!
-  </ion-item>
-  <form  #form="ngForm" (ngSubmit)="register(form)">
+
+  <form  #form="ngForm" (ngSubmit)="login(form)">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
-            <h3>Create your account!</h3>
+            <h3>Login!</h3>
           </div>
           <div padding>
             <ion-item>
@@ -18,9 +16,6 @@
             </ion-item>
             <ion-item>
               <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input name="confirm" type="password" placeholder="Confirm your password" ngModel required></ion-input>
             </ion-item>
           </div>
           <div padding>
@@ -30,5 +25,5 @@
       </ion-row>
     </ion-grid>
   </form>
-  <ion-label>You already have an account? <a routerLink="/login">Login</a></ion-label>
+  <ion-label>You don't have an account? <a routerLink="/signup">Sign up</a></ion-label>
 </ion-content>

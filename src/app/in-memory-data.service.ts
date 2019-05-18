@@ -31,6 +31,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { name: 'Fifa19'},
       { name: 'Call of Duty'}
     ];
-    return { users , games};
+    const currentUser = [];
+    return { users , games, currentUser};
   }
 }

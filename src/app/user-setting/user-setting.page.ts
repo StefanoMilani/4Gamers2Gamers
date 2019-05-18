@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AlertController, PickerController} from '@ionic/angular';
+import {AuthService} from '../auth/auth.service';
+import {User} from '../user';
 
 @Component({
   selector: 'app-user-setting',
@@ -7,11 +9,16 @@ import {AlertController, PickerController} from '@ionic/angular';
   styleUrls: ['./user-setting.page.scss'],
 })
 export class UserSettingPage implements OnInit {
+  private currentUser: User;
 
   constructor(private picker: PickerController,
-              private alert: AlertController) { }
+              private alert: AlertController,
+              private authService: AuthService
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.currentUser = await this.authService.checkLogin();
+    console.log(this.currentUser);
   }
 // MARK: Save alert methods
   async saveAlertMethod() {
@@ -41,14 +48,16 @@ export class UserSettingPage implements OnInit {
       buttons: [
         {text: 'Cancel' },
         {text: 'Confirm',
-          handler: _ => { this.confirmDelete(); } }
+          handler: () => {
+             this.deleteConfirmed();
+          } }
       ]
     });
     await alert.present();
   }
   // Delete account
-  private confirmDelete() {
-  // TODO: Delete account method
+  private async deleteConfirmed() {
+    await this.authService.deleteUser(this.currentUser);
     return true;
   }
   // MARK: Logout alert methods
@@ -60,14 +69,14 @@ export class UserSettingPage implements OnInit {
       buttons: [
         {text: 'Cancel' },
         {text: 'Confirm',
-          handler: _ => { this.confirmLogout(); } }
+          handler:  () => { this.confirmLogout(); } }
       ]
     });
     await alert.present();
   }
-  // Confirn logout
-  private confirmLogout() {
-  return true;
+  // Confirm logout
+  private async confirmLogout() {
+    await this.authService.deleteCurrentUser(this.currentUser);
   }
 
   // MARK: Picker methods

@@ -1,12 +1,12 @@
-<ion-header>
+<ion-header *ngIf="currentUser">
   <ion-toolbar>
     <ion-title>
-      Profile
+      {{currentUser.nickname}}'s Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content *ngIf="currentUser">
 
 
   <!-- Cover image -->
@@ -16,7 +16,7 @@
     <ion-img id="profile-image" src="../assets/img/icon.png"></ion-img>
   </ion-avatar>
   <!-- Player name -->
-  <ion-label id="player-name">Player Name</ion-label>
+  <ion-label id="player-name">{{currentUser.nickname}}</ion-label>
   <!-- Button -->
   <ion-fab horizontal="end" vertical="top">
     <ion-fab-button color="secondary" size="small" routerLink="/tabs/setting">
