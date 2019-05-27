@@ -12,7 +12,10 @@
   <ion-list #list>
     <ion-item>
       <ion-label>Edit nickname:</ion-label>
-      <ion-input #nicknameBox placeholder="{{nickname}}" debounce="500" (ionChange)="nicknameInput(nicknameBox.value)"></ion-input>
+      <ion-input #nicknameBox placeholder="{{nickname}}"
+                 debounce="500" (ionChange)="nicknameInput(nicknameBox.value)"
+                 [(ngModel)]="nicknameInputField">
+      </ion-input>
     </ion-item>
     <ion-item detail="true">
       <ion-label>Edit profile pic:</ion-label>
@@ -23,12 +26,15 @@
     </ion-item>
     <ion-item>
       <ion-label>Edit email:</ion-label>
-      <ion-input #emailBox placeholder="{{email}}" debounce="500" (ionChange)="emailInput(emailBox.value)"></ion-input>
+      <ion-input #emailBox placeholder="{{email}}"
+                 debounce="500" (ionChange)="emailInput(emailBox.value)"
+                 [(ngModel)]="emailInputField"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Change password:</ion-label>
       <ion-input #passBox placeholder="New password" type="password"
-                 debounce="500" (ionChange)="passInput(passBox.value)"></ion-input>
+                 debounce="500" (ionChange)="passInput(passBox.value)"
+                 [(ngModel)]="passInputField"></ion-input>
     </ion-item>
   </ion-list>
   <!-- Save changed button -->

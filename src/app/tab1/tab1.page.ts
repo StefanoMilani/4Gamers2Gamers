@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {UserService} from '../user.service';
 import {User} from '../user';
 import {AuthService} from '../auth/auth.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -10,7 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['tab1.page.scss']
 })
 
-export class Tab1Page implements OnInit {
+export class Tab1Page {
     displaySearch = false;
     currentUser: User;
     usersSearch: User[] = [];
@@ -18,8 +17,8 @@ export class Tab1Page implements OnInit {
     constructor(private userService: UserService,
                 private authService: AuthService,
     ) {}
-    // OnInit method
-    async ngOnInit() {
+    // Refresh current user every time you enter the page
+    async ionViewDidEnter() {
         this.currentUser = await this.authService.checkLogin();
         console.log(this.currentUser);
     }

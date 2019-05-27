@@ -1,30 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {AlertController, PickerController} from '@ionic/angular';
 import {AuthService} from '../auth/auth.service';
 import {User} from '../user';
 import {UserService} from '../user.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-setting',
   templateUrl: './user-setting.page.html',
   styleUrls: ['./user-setting.page.scss'],
 })
-export class UserSettingPage implements OnInit {
+export class UserSettingPage {
   private currentUser: User;
   private nickname: string;
   private email: string;
   private pass: string;
   private country: string;
+  private nicknameInputField: string;
+  private emailInputField: string;
+  private passInputField: string;
   // Constructor
   constructor(private picker: PickerController,
               private alert: AlertController,
               private authService: AuthService,
               private userService: UserService,
-              private router: Router
   ) { }
-
-  async ngOnInit() {
+  // Refresh current user every time you enter the page
+  async ionViewDidEnter() {
     this.currentUser = await this.authService.checkLogin();
     this.nickname = this.currentUser.nickname;
     this.pass = this.currentUser.password;
@@ -80,7 +81,9 @@ export class UserSettingPage implements OnInit {
     await this.userService.updateUser(user);
     await this.authService.setCurrentUser(user);
     this.currentUser = await this.authService.checkLogin();
-
+    this.nicknameInputField = '';
+    this.emailInputField = '';
+    this.passInputField = '';
     return true;
   }
   // MARK: Delete account alert methods
@@ -164,6 +167,8 @@ export class UserSettingPage implements OnInit {
     if (selectedValue === '---') {  return; }
     this.country = selectedValue;
   }
+
+
 
 
 }
