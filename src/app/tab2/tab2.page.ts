@@ -13,6 +13,7 @@ export class Tab2Page {
   constructor(private authService: AuthService
   ) {}
   // Refresh current user every time you enter the page
+  // noinspection JSUnusedGlobalSymbols
   async ionViewDidEnter() {
     this.currentUser = await this.authService.checkLogin();
   }

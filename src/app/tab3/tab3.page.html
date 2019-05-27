@@ -15,10 +15,8 @@
   <ion-avatar>
     <ion-img id="profile-image" src="../assets/img/icon.png"></ion-img>
   </ion-avatar>
-  <!-- Player name -->
-  <ion-label id="player-name">{{currentUser.nickname}}</ion-label>
   <!-- Button -->
-  <ion-fab horizontal="end" vertical="top">
+  <ion-fab horizontal="end" vertical="top" slot="fixed">
     <ion-fab-button color="secondary" size="small" routerLink="/setting">
       <ion-icon name="settings"></ion-icon>
     </ion-fab-button>
@@ -29,6 +27,26 @@
       <ion-icon name="people"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <!-- Player info -->
+  <ion-grid class="player-info">
+    <ion-row>
+      <ion-col>
+        <!-- Player name -->
+        <ion-label id="player-name" class="player-info-label">{{currentUser.nickname}}</ion-label>
+      </ion-col>
+      <ion-col>
+        <!-- Player country -->
+        <ion-label id="player-country" class="player-info-label"> {{ currentUser.country }}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <!-- Player favorite game -->
+        <ion-label id="'favorite-game" class="player-info-label">{{ currentUser.favorite_game }}</ion-label>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
   <!-- Actions -->
   <div class="action-div">
 

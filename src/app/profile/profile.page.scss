@@ -3,6 +3,11 @@ ion-content{
   height: 100%;
 }
 
+.alert-messages{
+  position: absolute;
+  z-index: 100;
+}
+
 #cover-image{
   position: fixed;
   width: 100%;
@@ -62,3 +67,9 @@ ion-card{
   position: relative;
   top: 4px;
 }
+
+.game-img{
+  width: 40%;
+}
+
+
