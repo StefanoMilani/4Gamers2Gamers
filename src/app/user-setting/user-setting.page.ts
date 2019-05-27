@@ -15,6 +15,7 @@ export class UserSettingPage {
   private email: string;
   private pass: string;
   private country: string;
+  private favoriteGame: string;
   private nicknameInputField: string;
   private emailInputField: string;
   private passInputField: string;
@@ -31,6 +32,7 @@ export class UserSettingPage {
     this.pass = this.currentUser.password;
     this.email = this.currentUser.email;
     this.country = this.currentUser.country;
+    this.favoriteGame = this.currentUser.favoriteGame;
     console.log(this.currentUser);
   }
   // MARK: Input handler methods
@@ -76,7 +78,8 @@ export class UserSettingPage {
       nickname: this.nickname,
       password: this.pass,
       country: this.country,
-      email: this.email
+      email: this.email,
+      favoriteGame: this.favoriteGame
     };
     await this.userService.updateUser(user);
     await this.authService.setCurrentUser(user);

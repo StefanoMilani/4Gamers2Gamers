@@ -18,43 +18,43 @@ export class InMemoryDataService implements InMemoryDbService {
     const users = [
       { id: 11, nickname: 'Stefano'   , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fifa19'
+        favoriteGame: 'Fifa19'
       },
       { id: 12, nickname: 'Andrea'    , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fifa19'
+        favoriteGame: 'Fifa19'
       },
       { id: 13, nickname: 'Giovanni'  , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fortnite'
+        favoriteGame: 'Fortnite'
       },
       { id: 14, nickname: 'Edoardo'   , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fortnite'
+        favoriteGame: 'Fortnite'
       },
       { id: 15, nickname: 'Magneta'   , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fifa19'
+        favoriteGame: 'Fifa19'
       },
       { id: 16, nickname: 'RubberMan' , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fifa19'
+        favoriteGame: 'Fifa19'
       },
       { id: 17, nickname: 'Dynama'    , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fortnite'
+        favoriteGame: 'Fortnite'
       },
       { id: 18, nickname: 'Dr IQ'     , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fortnite'
+        favoriteGame: 'Fortnite'
       },
       { id: 19, nickname: 'Magma'     , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fortnite'
+        favoriteGame: 'Fortnite'
       },
       { id: 20, nickname: 'Tornado'   , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favorite_game: 'Fortnite'
+        favoriteGame: 'Fortnite'
       }
     ];
     const games = [

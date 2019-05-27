@@ -19,7 +19,6 @@
     <ion-icon name="send"></ion-icon>
     <ion-label>Vote sent with success</ion-label>
   </ion-chip>
-
   <!-- Cover image -->
   <ion-img id="cover-image" src="../assets/img/cover.jpg"></ion-img>
   <!-- Profile image -->
@@ -35,15 +34,14 @@
       </ion-col>
       <ion-col>
         <!-- Player country -->
-        <ion-label id="player-country" class="player-info-label"> {{ user.country }}</ion-label>
+        <ion-label id="player-country" class="player-info-label">Country: {{ user.country }}</ion-label>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <!-- Player favorite game -->
-        <ion-label id="'favorite-game" class="player-info-label">{{ user.favorite_game }}</ion-label>
+        <ion-label id="'favorite-game" class="player-info-label">Actually playing: {{ user.favoriteGame }}</ion-label>
       </ion-col>
-      <ion-col></ion-col>
     </ion-row>
   </ion-grid>
   <!-- Actions -->
@@ -77,20 +75,21 @@
       <ion-label id="game-title">Games</ion-label>
     </ion-chip>
     <ion-list>
-      <ion-item *ngFor=" let stat of stats " >
+      <ion-item *ngFor=" let stat of stats " class="game-item">
         <ion-img src="assets/games/{{stat.game}}.jpg" class="game-img"></ion-img>
-        <div>
-          <ion-label>{{ stat.game }}</ion-label>
-        </div>
-        <div>
-        <ion-label>Matches played: {{ stat.matchPlayed }}</ion-label>
-        </div>
-        <div>
-        <ion-label>Win Lose Ratio: {{ stat.winLoseRatio }}</ion-label>
-        </div>
+        <ion-grid class="game-grid">
+          <ion-row>
+            <ion-label class="game-title-label">{{ stat.game }}</ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-label>Matches played: {{ stat.matchPlayed }}</ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-label>Win Lose Ratio: {{ stat.winLoseRatio }}</ion-label>
+          </ion-row>
+        </ion-grid>
       </ion-item>
     </ion-list>
-    <!-- TODO: Add game db with images-->
   </div>
 
 

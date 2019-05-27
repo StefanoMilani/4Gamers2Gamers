@@ -37,7 +37,6 @@ export class ProfilePage {
     }
     await this.getUser();
     this.stats = await this.gameService.getStatsByUser(this.user);
-    console.log(this.stats);
     this.voteWrong = false;
     this.voteSent = false;
   }

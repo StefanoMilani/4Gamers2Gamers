@@ -34,7 +34,7 @@ ion-fab{
 
 ion-grid {
   position: absolute;
-  top: 210px;
+  top: 220px;
   width: 100%;
   text-align: center;
 }
@@ -45,6 +45,7 @@ ion-grid {
 
 #player-name{
   font-size: x-large;
+  font-weight: bold;
 }
 
 .action-div{
@@ -68,8 +69,24 @@ ion-card{
   top: 4px;
 }
 
+.game-item{
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
 .game-img{
   width: 40%;
 }
 
+.game-grid{
+  width: 50%;
+  position: relative;
+  top: 1%;
+}
+
+.game-title-label{
+  font-size: large;
+  font-weight: bold;
+}
 
