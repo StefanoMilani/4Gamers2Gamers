@@ -35,15 +35,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'setting',
-        children: [
-          {
-            path: '',
-            loadChildren: '../user-setting/user-setting.module#UserSettingPageModule'
-          }
-        ]
-      },
-      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
