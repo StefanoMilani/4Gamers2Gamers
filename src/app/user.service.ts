@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from './user';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,9 @@ import { of } from 'rxjs';
 export class UserService {
   // API url
   private usersUrl = 'api/users';
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   // Constructor
   constructor( private http: HttpClient ) { }
   // Get the list of users
@@ -28,4 +31,7 @@ export class UserService {
     return this.http.get<User[]>(`${this.usersUrl}/?nickname=${term}`).toPromise();
   }
 
+  async updateUser(user: User): Promise<User> {
+    return await this.http.post<User>(this.usersUrl, user, this.httpOptions).toPromise();
+  }
 }

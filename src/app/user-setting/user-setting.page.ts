@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AlertController, PickerController} from '@ionic/angular';
 import {AuthService} from '../auth/auth.service';
 import {User} from '../user';
+import {UserService} from '../user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-setting',
@@ -10,17 +12,49 @@ import {User} from '../user';
 })
 export class UserSettingPage implements OnInit {
   private currentUser: User;
-
+  private nickname: string;
+  private email: string;
+  private pass: string;
+  private country: string;
+  // Constructor
   constructor(private picker: PickerController,
               private alert: AlertController,
-              private authService: AuthService
+              private authService: AuthService,
+              private userService: UserService,
+              private router: Router
   ) { }
 
   async ngOnInit() {
     this.currentUser = await this.authService.checkLogin();
+    this.nickname = this.currentUser.nickname;
+    this.pass = this.currentUser.password;
+    this.email = this.currentUser.email;
+    this.country = this.currentUser.country;
     console.log(this.currentUser);
   }
-// MARK: Save alert methods
+  // MARK: Input handler methods
+  nicknameInput(term: string) {
+    if (term === '') {
+      this.nickname = this.currentUser.nickname;
+    } else {
+      this.nickname = term;
+    }
+  }
+  emailInput(term: string) {
+    if (term === '') {
+      this.email = this.currentUser.email;
+    } else {
+      this.email = term;
+    }
+  }
+  passInput(term: string) {
+    if (term === '') {
+      this.pass = this.currentUser.password;
+    } else {
+      this.pass = term;
+    }
+  }
+  // MARK: Save alert methods
   async saveAlertMethod() {
     const alert = await this.alert.create({
       header: 'Save changes',
@@ -35,8 +69,18 @@ export class UserSettingPage implements OnInit {
     await alert.present();
   }
   // Save changes!
-  private confirmSave() {
-    // TODO: Add save method!
+  private async confirmSave() {
+    const user: User = {
+      id: this.currentUser.id,
+      nickname: this.nickname,
+      password: this.pass,
+      country: this.country,
+      email: this.email
+    };
+    await this.userService.updateUser(user);
+    await this.authService.setCurrentUser(user);
+    this.currentUser = await this.authService.checkLogin();
+
     return true;
   }
   // MARK: Delete account alert methods
@@ -86,7 +130,7 @@ export class UserSettingPage implements OnInit {
         text: 'Cancel',
       }, {
         text: 'Done',
-        handler: _ => { this.changeCountry(); }
+        handler: (data: any) => { this.changeCountry(data); }
       }],
       columns: [
         {
@@ -115,7 +159,11 @@ export class UserSettingPage implements OnInit {
     await picker.present();
   }
   // Change country
-  private changeCountry() {
-    console.log('Picker\'s done button triggered');
+  private changeCountry(country) {
+    const selectedValue = country.Country.text;
+    if (selectedValue === '---') {  return; }
+    this.country = selectedValue;
   }
+
+
 }

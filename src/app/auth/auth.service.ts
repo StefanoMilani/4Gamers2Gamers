@@ -50,9 +50,11 @@ export class AuthService {
   // Check and retrieve current user
   async checkLogin(): Promise<User> {
     const users = await this.http.get<User[]>(this.currentUrl).toPromise();
-    console.log(users[0]);
+    // console.log(users[0]);
     if (users.length === 0) {
-      await this.router.navigate(['']);
+      // For developing
+      return await this.userService.getUser(11);
+      // await this.router.navigate(['']);
     } else {
       return users.pop();
     }

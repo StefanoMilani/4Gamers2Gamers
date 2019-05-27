@@ -16,16 +16,16 @@ export class InMemoryDataService implements InMemoryDbService {
   // Database
   createDb() {
     const users = [
-      { id: 11, nickname: 'Mr. Nice'  , password: 'pass'},
-      { id: 12, nickname: 'Narco'     , password: 'pass'},
-      { id: 13, nickname: 'Bombasto'  , password: 'pass'},
-      { id: 14, nickname: 'Celeritas' , password: 'pass'},
-      { id: 15, nickname: 'Magneta'   , password: 'pass'},
-      { id: 16, nickname: 'RubberMan' , password: 'pass'},
-      { id: 17, nickname: 'Dynama'    , password: 'pass'},
-      { id: 18, nickname: 'Dr IQ'     , password: 'pass'},
-      { id: 19, nickname: 'Magma'     , password: 'pass'},
-      { id: 20, nickname: 'Tornado'   , password: 'pass'}
+      { id: 11, nickname: 'Stefano'   , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 12, nickname: 'Andrea'    , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 13, nickname: 'Giovanni'  , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 14, nickname: 'Edoardo'   , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 15, nickname: 'Magneta'   , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 16, nickname: 'RubberMan' , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 17, nickname: 'Dynama'    , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 18, nickname: 'Dr IQ'     , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 19, nickname: 'Magma'     , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'},
+      { id: 20, nickname: 'Tornado'   , password: 'pass'  , country: 'Italy'  , email: 'example@foo.com'}
     ];
     const games = [
       { name: 'Fifa19'},
