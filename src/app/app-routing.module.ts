@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'setting', loadChildren: './user-setting/user-setting.module#UserSettingPageModule'},
   { path: 'signup', loadChildren: './auth/register/register.module#RegisterPageModule' },
   { path: 'login', loadChildren: './auth/login/login.module#LoginPageModule' },
-  { path: 'profile/:id', loadChildren: './profile/profile.module#ProfilePageModule' }
+  { path: 'profile/:id', loadChildren: './profile/profile.module#ProfilePageModule' },
+  { path: 'games', loadChildren: './user-setting/games/games.module#GamesPageModule' }
 ];
 @NgModule({
   imports: [

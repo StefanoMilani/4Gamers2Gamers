@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Choose a game</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="games">
+  <ion-grid>
+    <ion-row *ngFor="let elem of gamesMatrix">
+      <ion-col *ngIf="elem[0]">
+        <ion-img #gameImg id='{{elem[0].name}}' src="assets/games/{{elem[0].name}}.jpg"
+                 class="game-img" (click)='alertGame(elem[0])'>
+        </ion-img>
+      </ion-col>
+      <ion-col *ngIf="elem[1]">
+      <ion-img #gameImg id='{{elem[1].name}}' src="assets/games/{{elem[1].name}}.jpg"
+               class="game-img" (click)='alertGame(elem[1])'></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

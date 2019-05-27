@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from './user';
 import {Stat} from './stat';
-import {UserService} from './user.service';
-import {of} from 'rxjs';
+import {Game} from './game';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +20,9 @@ export class GameService {
   async getStatsByUser(user: User): Promise<Stat[]> {
     const url = `${this.statsUrl}/?userId=${user.id}`;
     return this.http.get<Stat[]>(url).toPromise();
+  }
+
+  async getGames(): Promise<Game[]> {
+    return this.http.get<Game[]>(this.gameUrl).toPromise();
   }
 }
