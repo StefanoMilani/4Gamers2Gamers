@@ -61,7 +61,8 @@ export class InMemoryDataService implements InMemoryDbService {
       { name: 'Fifa19'},
       { name: 'Call of Duty'},
       { name: 'Fortnite'},
-      { name: 'Apex Legends'}
+      { name: 'Apex Legends'},
+      { name: 'League of Legends'}
     ];
     const currentUser = [];
     const stats = [

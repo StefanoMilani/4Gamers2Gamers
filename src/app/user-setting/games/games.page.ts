@@ -3,7 +3,8 @@ import {AuthService} from '../../auth/auth.service';
 import {GameService} from '../../game.service';
 import {User} from '../../user';
 import {Game} from '../../game';
-import {IonImg} from '@ionic/angular';
+import {AlertController, IonImg} from '@ionic/angular';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-games',
@@ -14,15 +15,19 @@ export class GamesPage {
   private currentUser: User;
   private games: Game[];
   private gamesMatrix = new Array<Array<Game>>();
+  private gameChanged = false;
 
   constructor(private authService: AuthService,
-              private gameService: GameService
+              private userService: UserService,
+              private gameService: GameService,
+              private alert: AlertController
   ) { }
   // Refresh current user every time you enter the page
   async ionViewDidEnter() {
     this.currentUser = await this.authService.checkLogin();
     this.games = await this.gameService.getGames();
     this.createGameMatrix();
+    this.gameChanged = false;
   }
 
   private createGameMatrix() {
@@ -33,8 +38,30 @@ export class GamesPage {
     }
   }
 
-  alertGame(game: Game) {
+  async alertGame(game: Game) {
     console.log((game));
-    // TODO: Create alert to confirm changes
+    const alert = await this.alert.create({
+      header: 'You selected ',
+      subHeader: game.name,
+      message: 'Save changes?',
+      buttons: [
+        {text: 'Cancel'},
+        {
+          text: 'Confirm',
+          handler: _ => {
+            this.changeGame(game);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  private async changeGame(game: Game) {
+    this.currentUser.favoriteGame = game.name;
+    console.log(this.currentUser);
+    await this.userService.updateUser(this.currentUser);
+    await this.authService.setCurrentUser(this.currentUser);
+    this.gameChanged = true;
   }
 }
