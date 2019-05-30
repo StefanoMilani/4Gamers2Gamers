@@ -18,43 +18,43 @@ export class InMemoryDataService implements InMemoryDbService {
     const users = [
       { id: 11, nickname: 'Stefano'   , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fifa19'
+        favoriteGame: 'Fifa19', gameConsole: 'xBox One'
       },
       { id: 12, nickname: 'Andrea'    , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fifa19'
+        favoriteGame: 'Fifa19', gameConsole: 'Playstation4'
       },
       { id: 13, nickname: 'Giovanni'  , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fortnite'
+        favoriteGame: 'Fortnite', gameConsole: 'Playstation4'
       },
       { id: 14, nickname: 'Edoardo'   , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fortnite'
+        favoriteGame: 'Fortnite', gameConsole: 'xBox One'
       },
       { id: 15, nickname: 'Magneta'   , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fifa19'
+        favoriteGame: 'Fifa19', gameConsole: 'Playstation4'
       },
       { id: 16, nickname: 'RubberMan' , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fifa19'
+        favoriteGame: 'Fifa19', gameConsole: 'xBox One'
       },
       { id: 17, nickname: 'Dynama'    , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fortnite'
+        favoriteGame: 'Fortnite', gameConsole: 'Mobile'
       },
       { id: 18, nickname: 'Dr IQ'     , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fortnite'
+        favoriteGame: 'Fortnite', gameConsole: 'Mobile'
       },
       { id: 19, nickname: 'Magma'     , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fortnite'
+        favoriteGame: 'Fortnite', gameConsole: 'Nintendo Switch'
       },
       { id: 20, nickname: 'Tornado'   , password: 'pass' ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fortnite'
+        favoriteGame: 'Fortnite', gameConsole: 'Nintendo Switch'
       }
     ];
     const games = [
@@ -74,6 +74,12 @@ export class InMemoryDataService implements InMemoryDbService {
       { userId: 13  , game: 'Apex Legends'  , winLoseRatio: 0.9   , matchPlayed: 122   },
       { userId: 14  , game: 'Fifa19'        , winLoseRatio: 3.88  , matchPlayed: 970   },
     ];
-    return { users , games, currentUser, stats};
+    const console = [
+      { name: 'xBox One'},
+      { name: 'Playstation4'},
+      { name: 'Nintendo Switch'},
+      { name: 'Mobile'}
+    ];
+    return { users , games, currentUser, stats, console};
   }
 }

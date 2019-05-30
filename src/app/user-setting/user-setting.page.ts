@@ -19,6 +19,7 @@ export class UserSettingPage {
   private nicknameInputField: string;
   private emailInputField: string;
   private passInputField: string;
+  private gameConsole: string;
   // Constructor
   constructor(private picker: PickerController,
               private alert: AlertController,
@@ -26,6 +27,7 @@ export class UserSettingPage {
               private userService: UserService,
   ) { }
   // Refresh current user every time you enter the page
+  // noinspection JSUnusedGlobalSymbols
   async ionViewDidEnter() {
     this.currentUser = await this.authService.checkLogin();
     this.nickname = this.currentUser.nickname;
@@ -33,6 +35,7 @@ export class UserSettingPage {
     this.email = this.currentUser.email;
     this.country = this.currentUser.country;
     this.favoriteGame = this.currentUser.favoriteGame;
+    this.gameConsole = this.currentUser.gameConsole;
     console.log(this.currentUser);
   }
   // MARK: Input handler methods
@@ -59,6 +62,7 @@ export class UserSettingPage {
   }
   // MARK: Save alert methods
   async saveAlertMethod() {
+    // noinspection JSUnusedGlobalSymbols
     const alert = await this.alert.create({
       header: 'Save changes',
       subHeader: 'The changes are irreversible!',
@@ -79,7 +83,8 @@ export class UserSettingPage {
       password: this.pass,
       country: this.country,
       email: this.email,
-      favoriteGame: this.favoriteGame
+      favoriteGame: this.favoriteGame,
+      gameConsole: this.gameConsole
     };
     await this.userService.updateUser(user);
     await this.authService.setCurrentUser(user);
@@ -91,6 +96,7 @@ export class UserSettingPage {
   }
   // MARK: Delete account alert methods
   async deleteAlertMethod() {
+    // noinspection JSUnusedGlobalSymbols
     const alert = await this.alert.create({
       header: 'Delete account',
       subHeader: 'This is irreversible!',
@@ -112,6 +118,7 @@ export class UserSettingPage {
   }
   // MARK: Logout alert methods
   async logoutAlertMethod() {
+    // noinspection JSUnusedGlobalSymbols
     const alert = await this.alert.create({
       header: 'Logout',
       subHeader: 'Don\'t leave us!',
@@ -128,9 +135,48 @@ export class UserSettingPage {
   private async confirmLogout() {
     await this.authService.deleteCurrentUser(this.currentUser);
   }
-
   // MARK: Picker methods
-  async openPicker() {
+  async openConsolePicker() {
+    // noinspection JSUnusedGlobalSymbols
+    const picker = await this.picker.create({
+      buttons: [{
+        text: 'Cancel',
+      }, {
+        text: 'Done',
+        handler: (data: any) => { this.changeConsole(data);  }
+      }],
+      columns: [
+        {
+          name: 'Console',
+          options: [
+            {
+              text: '---',
+              value: 0
+            },
+            {
+              text: 'xBox One',
+              value: 1
+            },
+            {
+              text: 'Playstation4',
+              value: 2
+            },
+            {
+              text: 'Nintendo Switch',
+              value: 3
+            },
+            {
+              text: 'Mobile',
+              value: 4
+            },
+          ]
+        },
+      ]
+    });
+    await picker.present();
+  }
+  async openCountryPicker() {
+    // noinspection JSUnusedGlobalSymbols
     const picker = await this.picker.create({
       buttons: [{
         text: 'Cancel',
@@ -170,8 +216,10 @@ export class UserSettingPage {
     if (selectedValue === '---') {  return; }
     this.country = selectedValue;
   }
-
-
-
-
+  // Change console
+  private changeConsole(gameConsole) {
+    const selectedValue = gameConsole.Console.text;
+    if (selectedValue === '---') {  return; }
+    this.gameConsole = selectedValue;
+  }
 }

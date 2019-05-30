@@ -5,4 +5,5 @@ export class User {
     country: string;
     email: string;
     favoriteGame: string;
+    gameConsole: string;
 }
