@@ -23,6 +23,7 @@ export class GamesPage {
               private alert: AlertController
   ) { }
   // Refresh current user every time you enter the page
+  // noinspection JSUnusedGlobalSymbols
   async ionViewDidEnter() {
     this.currentUser = await this.authService.checkLogin();
     this.games = await this.gameService.getGames();

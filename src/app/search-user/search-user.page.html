@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Search User</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- Form view -->
+<ion-content *ngIf="!gameChoosing">
+  <ion-chip *ngIf="errorSet" color="danger">
+    <ion-icon name="alert"></ion-icon>
+    <ion-label>You have to set at least one filter!</ion-label>
+  </ion-chip>
+  <!-- Search Form -->
+  <ion-list>
+    <ion-item detail="true" (click)="chooseGame()">
+      <ion-label>Choose game:</ion-label>
+      <ion-label *ngIf="game !== '---'">{{game}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Choose platform:
+      </ion-label>
+      <ion-button (click)="openConsolePicker()">
+        {{gameConsole}}
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Choose nationality:
+      </ion-label>
+      <ion-button (click)="openCountryPicker()">
+        {{country}}
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-label>Choose age range:</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label class="age-label">Min:</ion-label>
+          <ion-input #minAgeBox id="min-age" class="age-input" type="number"
+                     debounce="500" (ionChange)="changeMinAge(minAgeBox)"
+          >
+          </ion-input>
+        </ion-row>
+        <ion-row>
+          <ion-label class="age-label">Max:</ion-label>
+          <ion-input #maxAgeBox id="max-age" class="age-input" type="number"
+                     debounce="500" (ionChange)="changeMaxAge(maxAgeBox)"
+          >
+          </ion-input>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  <ion-button *ngIf="!searchDone"
+              size="large" expand="block"
+              (click)="search()"
+  >
+    Start search!
+  </ion-button>
+  <ion-button *ngIf="searchDone"
+              size="large" expand="block"
+              (click)="search()"
+  >
+    Refresh results
+  </ion-button>
+  <!-- Search results -->
+  <ion-list *ngIf="searchDone && users.length === 0">
+    <ion-list-header>
+      No users to show
+    </ion-list-header>
+  </ion-list>
+  <ion-list *ngIf="searchDone && users.length !== 0">
+    <ion-list-header>
+      Search results
+    </ion-list-header>
+    <ion-item *ngFor="let user of users"
+              routerLink="/profile/{{user.id}}">
+      <ion-avatar class="user-avatar">
+        <ion-img src="../assets/img/icon.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="user-nick">{{ user.nickname }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!-- Game choose view -->
+<ion-content *ngIf="gameChoosing && games" >
+  <ion-card id="game-choosing">
+    <ion-button size="small" color="danger" id="close-game-card" (click)="closeGameChoice()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-card-header>
+      Choose the game by touching the images.
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor="let elem of gamesMatrix">
+          <ion-col>
+            <ion-img *ngIf="elem[0]" id='{{elem[0].name}}'
+                     src="assets/games/{{elem[0].name}}.jpg" class="game-img"
+                     (click)='alertGame(elem[0])'>
+            </ion-img>
+          </ion-col>
+          <ion-col>
+            <ion-img *ngIf="elem[1]" id='{{elem[1].name}}'
+                     src="assets/games/{{elem[1].name}}.jpg" class="game-img"
+                     (click)='alertGame(elem[1])'>
+            </ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
