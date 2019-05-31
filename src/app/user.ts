@@ -6,4 +6,5 @@ export class User {
     email: string;
     favoriteGame: string;
     gameConsole: string;
+    birthYear: number;
 }

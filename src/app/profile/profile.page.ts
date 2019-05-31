@@ -55,4 +55,9 @@ export class ProfilePage {
       this.voteSent = true;
     }
   }
+
+    getAge() {
+      const year = new Date();
+      return year.getFullYear() - this.user.birthYear;
+    }
 }

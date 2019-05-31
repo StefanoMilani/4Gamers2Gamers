@@ -81,6 +81,7 @@ export class UserSettingPage {
       id: this.currentUser.id,
       nickname: this.nickname,
       password: this.pass,
+      birthYear: this.currentUser.birthYear,
       country: this.country,
       email: this.email,
       favoriteGame: this.favoriteGame,

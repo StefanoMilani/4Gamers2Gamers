@@ -1,3 +1,9 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create an account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
   <ion-item *ngIf="passWrong" color="danger">
     The password and the confirmation are not the same!
@@ -9,9 +15,6 @@
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
-            <h3>Create your account!</h3>
-          </div>
           <div padding>
             <ion-item>
               <ion-input  name="nickname" type="text" placeholder="Nickname" ngModel required></ion-input>

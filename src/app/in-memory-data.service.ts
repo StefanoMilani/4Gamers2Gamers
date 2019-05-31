@@ -16,43 +16,43 @@ export class InMemoryDataService implements InMemoryDbService {
   // Database
   createDb() {
     const users = [
-      { id: 11, nickname: 'Stefano'   , password: 'pass' ,
+      { id: 11, nickname: 'Stefano'   , password: 'pass' , birthYear: 1996 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fifa19', gameConsole: 'xBox One'
       },
-      { id: 12, nickname: 'Andrea'    , password: 'pass' ,
+      { id: 12, nickname: 'Andrea'    , password: 'pass' , birthYear: 1994 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fifa19', gameConsole: 'Playstation4'
       },
-      { id: 13, nickname: 'Giovanni'  , password: 'pass' ,
+      { id: 13, nickname: 'Giovanni'  , password: 'pass' , birthYear: 1996 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fortnite', gameConsole: 'Playstation4'
       },
-      { id: 14, nickname: 'Edoardo'   , password: 'pass' ,
+      { id: 14, nickname: 'Edoardo'   , password: 'pass' , birthYear: 1995 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fortnite', gameConsole: 'xBox One'
       },
-      { id: 15, nickname: 'Magneta'   , password: 'pass' ,
+      { id: 15, nickname: 'Magneta'   , password: 'pass' , birthYear: 1999 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fifa19', gameConsole: 'Playstation4'
       },
-      { id: 16, nickname: 'RubberMan' , password: 'pass' ,
+      { id: 16, nickname: 'RubberMan' , password: 'pass' , birthYear: 1990 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fifa19', gameConsole: 'xBox One'
       },
-      { id: 17, nickname: 'Dynama'    , password: 'pass' ,
+      { id: 17, nickname: 'Dynama'    , password: 'pass' , birthYear: 2002 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fortnite', gameConsole: 'Mobile'
       },
-      { id: 18, nickname: 'Dr IQ'     , password: 'pass' ,
+      { id: 18, nickname: 'Dr IQ'     , password: 'pass' , birthYear: 2004 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fortnite', gameConsole: 'Mobile'
       },
-      { id: 19, nickname: 'Magma'     , password: 'pass' ,
+      { id: 19, nickname: 'Magma'     , password: 'pass' , birthYear: 1988 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fortnite', gameConsole: 'Nintendo Switch'
       },
-      { id: 20, nickname: 'Tornado'   , password: 'pass' ,
+      { id: 20, nickname: 'Tornado'   , password: 'pass' , birthYear: 2000 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
         favoriteGame: 'Fortnite', gameConsole: 'Nintendo Switch'
       }

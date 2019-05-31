@@ -31,10 +31,11 @@
       <ion-col>
         <!-- Player name -->
         <ion-label id="player-name" class="player-info-label">{{user.nickname}}</ion-label>
+        <ion-label id="player-age" class="player-info-label">({{ getAge() }} years)</ion-label>
       </ion-col>
       <ion-col>
         <!-- Player country -->
-        <ion-label id="player-country" class="player-info-label">Country: {{ user.country }}</ion-label>
+        <ion-label id="player-country" class="player-info-label">{{ user.gameConsole }} player</ion-label>
       </ion-col>
     </ion-row>
     <ion-row>
