@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AlertController, PickerController} from '@ionic/angular';
+import {AlertController, IonInput, IonToggle, PickerController} from '@ionic/angular';
 import {UserService} from '../user.service';
 import {User} from '../user';
 import {AuthService} from '../auth/auth.service';
@@ -27,6 +27,15 @@ export class SearchUserPage implements OnInit {
   // Game choose utilities
   private games: Game[];
   private gamesMatrix = new Array<Array<Game>>();
+  // Input element
+  minAgeInput: string;
+  maxAgeInput: string;
+  // Stats utils
+  private statToggle: boolean;
+  private winLoseRatio: number;
+  private matchPlayed: number;
+  winLoseInput: string;
+  matchPlayedInput: string;
 
   // Constructor
   constructor( private picker: PickerController,
@@ -37,12 +46,14 @@ export class SearchUserPage implements OnInit {
   )  { }
 
   async ngOnInit() {
+    this.statToggle = false;
     this.searchDone = false;
     this.gameChoosing = false;
     this.gameConsole = '---';
     this.country = '---';
     this.game = '---';
     this.minAge = this.maxAge = -1;
+    this.matchPlayed = this.winLoseRatio = -1;
     this.games = await this.gameService.getGames();
     this.createGameMatrix();
   }
@@ -51,11 +62,11 @@ export class SearchUserPage implements OnInit {
     this.currentUser = await this.authService.checkLogin();
   }
   // MARK: Age input methods
-  changeMinAge(input: any) {
-    this.minAge = input.value;
+  changeMinAge(input: IonInput) {
+    this.minAge = +input.value;
   }
-  changeMaxAge(input: any) {
-    this.maxAge = input.value;
+  changeMaxAge(input: IonInput) {
+    this.maxAge = +input.value;
   }
   // MARK: Picker methods
   async openConsolePicker() {
@@ -132,24 +143,6 @@ export class SearchUserPage implements OnInit {
     });
     await picker.present();
   }
-  // Change console
-  private changeConsole(gameConsole) {
-    const selectedValue = gameConsole.Console.text;
-    if (selectedValue === '---') {
-      this.gameConsole = '---';
-      return;
-    }
-    this.gameConsole = selectedValue;
-  }
-  // Change country
-  private changeCountry(country) {
-    const selectedValue = country.Country.text;
-    if (selectedValue === '---') {
-      this.country = '---';
-      return;
-    }
-    this.country = selectedValue;
-  }
   // MARK: game choose methods
   chooseGame() {
   this.gameChoosing = true;
@@ -173,18 +166,51 @@ export class SearchUserPage implements OnInit {
     });
     await alert.present();
   }
-  private changeGame(game: Game) {
-  this.game = game.name;
-  this.gameChoosing = false;
-  }
   closeGameChoice() {
-  this.gameChoosing = false;
+    this.gameChoosing = false;
   }
-  // Search method
+  deselectGame() {
+    this.game = '---';
+    this.gameChoosing = false;
+  }
+  resetFilter() {
+    this.gameConsole = '---';
+    this.country = '---';
+    this.game = '---';
+    this.minAge = this.maxAge = -1;
+    this.matchPlayed = -1;
+    this.winLoseRatio = -1;
+    this.statToggle = false;
+    this.minAgeInput = '';
+    this.maxAgeInput = '';
+    this.matchPlayedInput = '';
+    this.winLoseInput = '';
+  }
+  // MARK: Stats methods
+  triggerStatsToggle(gameStateToggle: IonToggle | any) {
+    this.statToggle = gameStateToggle.checked;
+    this.matchPlayed = this.winLoseRatio = -1;
+  }
+  winLoseChange(winLoseBox: IonInput) {
+    if (winLoseBox.value === '') {
+      this.winLoseRatio = -1;
+    } else {
+      this.winLoseRatio = +winLoseBox.value;
+    }
+  }
+  matchPlayedChange(matchPlayedBox: IonInput) {
+    if (matchPlayedBox.value === '') {
+      this.matchPlayed = -1;
+    } else {
+      this.matchPlayed = +matchPlayedBox.value;
+    }
+  }
+  // MARK: Search method
   async search() {
+    let stats;
     if (this.gameConsole === '---' && this.country === '---'
-        && this.game === '---' &&
-        this.minAge === -1 && this.maxAge === -1) {
+      && this.game === '---' &&
+      this.minAge === -1 && this.maxAge === -1) {
       this.errorSet = true;
       return;
     }
@@ -194,7 +220,7 @@ export class SearchUserPage implements OnInit {
     // Platform filter
     if (this.gameConsole !== '---') {
       this.users = this.users.filter(user => {
-         return user.gameConsole === this.gameConsole;
+        return user.gameConsole === this.gameConsole;
       });
     }
     // Nationality filter
@@ -208,6 +234,7 @@ export class SearchUserPage implements OnInit {
       this.users = this.users.filter(user => {
         return this.game === user.favoriteGame;
       });
+      stats = await this.gameService.getStatsByGame(this.game);
     }
     // Min age filter
     if (this.minAge !== -1 ) {
@@ -225,6 +252,26 @@ export class SearchUserPage implements OnInit {
         return user.birthYear >= year;
       });
     }
+    // Filter by stats if requested
+    if (this.statToggle) {
+      // Filter by win/Lose ratio
+      if (this.winLoseRatio !== -1) {
+        stats = stats.filter(stat => {
+          return this.winLoseRatio <= stat.winLoseRatio;
+        });
+      }
+      // Filter by match played
+      if (this.matchPlayed !== -1) {
+        stats = stats.filter(stat => {
+          return this.matchPlayed <= stat.matchPlayed;
+        });
+      }
+      this.users = this.users.filter(user => {
+        return stats.some(stat => {
+          return stat.userId === user.id;
+        });
+      });
+    }
     // remove current user from search result
     this.users = this.users.filter(user => {
       return user.id !== this.currentUser.id;
@@ -237,5 +284,28 @@ export class SearchUserPage implements OnInit {
       this.gamesMatrix[j] = [this.games[i], this.games[i + 1]];
       j++;
     }
+  }
+  // Change console
+  private changeConsole(gameConsole) {
+    const selectedValue = gameConsole.Console.text;
+    if (selectedValue === '---') {
+      this.gameConsole = '---';
+      return;
+    }
+    this.gameConsole = selectedValue;
+  }
+  // Change country
+  private changeCountry(country) {
+    const selectedValue = country.Country.text;
+    if (selectedValue === '---') {
+      this.country = '---';
+      return;
+    }
+    this.country = selectedValue;
+  }
+  // Change game
+  private changeGame(game: Game) {
+    this.game = game.name;
+    this.gameChoosing = false;
   }
 }

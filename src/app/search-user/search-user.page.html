@@ -12,6 +12,15 @@
     <ion-icon name="alert"></ion-icon>
     <ion-label>You have to set at least one filter!</ion-label>
   </ion-chip>
+  <!-- Reset filter -->
+  <div>
+  <ion-button color="warning" size="small"
+              (click)="resetFilter()">
+    <ion-label>
+      Reset filters
+    </ion-label>
+  </ion-button>
+  </div>
   <!-- Search Form -->
   <ion-list>
     <ion-item detail="true" (click)="chooseGame()">
@@ -35,27 +44,54 @@
       </ion-button>
     </ion-item>
     <ion-item>
-      <ion-grid>
-        <ion-row>
-          <ion-label>Choose age range:</ion-label>
-        </ion-row>
-        <ion-row>
+      <ion-list>
+        <ion-list-header>Choose age range</ion-list-header>
+        <ion-item>
           <ion-label class="age-label">Min:</ion-label>
           <ion-input #minAgeBox id="min-age" class="age-input" type="number"
                      debounce="500" (ionChange)="changeMinAge(minAgeBox)"
+                     [(ngModel)]="minAgeInput"
           >
           </ion-input>
-        </ion-row>
-        <ion-row>
+        </ion-item>
+        <ion-item>
           <ion-label class="age-label">Max:</ion-label>
           <ion-input #maxAgeBox id="max-age" class="age-input" type="number"
                      debounce="500" (ionChange)="changeMaxAge(maxAgeBox)"
+                     [(ngModel)]="maxAgeInput"
           >
           </ion-input>
-        </ion-row>
-      </ion-grid>
+        </ion-item>
+      </ion-list>
     </ion-item>
   </ion-list>
+  <!-- Stats form -->
+  <ion-item *ngIf="game !== '---'">
+    <ion-label>Game stats:</ion-label>
+    <ion-toggle #gameStateToggle (ionChange)="triggerStatsToggle(gameStateToggle)">
+    </ion-toggle>
+  </ion-item>
+  <ion-list *ngIf="statToggle">
+    <ion-item >
+      <ion-label>
+        Win/Lose Ratio:
+      </ion-label>
+      <ion-input #winLoseBox type="number"
+                 debounce="500" (ionChange)="winLoseChange(winLoseBox)"
+                 [(ngModel)]="winLoseInput">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Match Played:
+      </ion-label>
+      <ion-input #matchPlayedBox type="number"
+                 debounce="500" (ionChange)="matchPlayedChange(matchPlayedBox)"
+                 [(ngModel)]="matchPlayedInput">
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <!-- Search buttons -->
   <ion-button *ngIf="!searchDone"
               size="large" expand="block"
               (click)="search()"
@@ -91,7 +127,12 @@
 <!-- Game choose view -->
 <ion-content *ngIf="gameChoosing && games" >
   <ion-card id="game-choosing">
-    <ion-button size="small" color="danger" id="close-game-card" (click)="closeGameChoice()">
+    <ion-button size="small" color="warning" (click)="deselectGame()">
+      <ion-label>Deselect game!</ion-label>
+    </ion-button>
+    <ion-button size="small" color="danger"
+                id="close-game-card"
+                (click)="closeGameChoice()">
       <ion-icon name="close"></ion-icon>
     </ion-button>
     <ion-card-header>

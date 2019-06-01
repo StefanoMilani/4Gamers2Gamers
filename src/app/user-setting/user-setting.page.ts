@@ -36,7 +36,6 @@ export class UserSettingPage {
     this.country = this.currentUser.country;
     this.favoriteGame = this.currentUser.favoriteGame;
     this.gameConsole = this.currentUser.gameConsole;
-    console.log(this.currentUser);
   }
   // MARK: Input handler methods
   nicknameInput(term: string) {

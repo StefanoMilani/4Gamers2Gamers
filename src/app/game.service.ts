@@ -21,6 +21,11 @@ export class GameService {
     const url = `${this.statsUrl}/?userId=${user.id}`;
     return this.http.get<Stat[]>(url).toPromise();
   }
+  // Get stats by games
+  async getStatsByGame(game: string): Promise<Stat[]> {
+    const url = `${this.statsUrl}/?game=${game}`;
+    return this.http.get<Stat[]>(url).toPromise();
+  }
 
   async getGames(): Promise<Game[]> {
     return this.http.get<Game[]>(this.gameUrl).toPromise();
