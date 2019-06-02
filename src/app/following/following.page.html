@@ -8,6 +8,11 @@
 </ion-header>
 
 <ion-content *ngIf="followingNum && followersNum">
+  <ion-item>
+    <ion-label id="info-label">
+      Click on "Followers" or "Following" to show them.
+    </ion-label>
+  </ion-item>
   <!-- Follow stats -->
   <ion-grid>
     <ion-row>
@@ -19,6 +24,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <!-- Follower search input-->
+  <ion-searchbar #followerBox *ngIf="displayFollowerSearch || followerShow"
+                 placeholder="Search followers..." animated="true"
+                 debounce="500" (ionChange)="searchFollowers(followerBox.value)">
+  </ion-searchbar>
   <!-- Follower list -->
   <ion-list *ngIf="followerShow">
     <ion-list-header *ngIf="followers.length === 0">
@@ -27,13 +37,33 @@
     <ion-list-header *ngIf="followers.length !== 0">
       Followers
     </ion-list-header>
-    <ion-item *ngFor="let user of followers">
+    <ion-item *ngFor="let user of followers" routerLink="/profile/{{user.id}}">
       <ion-avatar class="user-avatar">
         <ion-img src="../assets/img/icon.png"></ion-img>
       </ion-avatar>
       <ion-label class="user-nick">{{ user.nickname }}</ion-label>
     </ion-item>
   </ion-list>
+  <!-- Follower search list -->
+  <ion-list *ngIf="displayFollowerSearch">
+    <ion-list-header *ngIf="followerSearch.length === 0">
+      Loading Users...
+    </ion-list-header>
+    <ion-list-header *ngIf="followerSearch.length !== 0">
+      Followers
+    </ion-list-header>
+    <ion-item *ngFor="let user of followerSearch" routerLink="/profile/{{user.id}}">
+      <ion-avatar class="user-avatar">
+        <ion-img src="../assets/img/icon.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="user-nick">{{ user.nickname }}</ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- Following search input-->
+  <ion-searchbar #followingBox *ngIf="displayFollowingSearch || followingShow"
+                 placeholder="Search following..." animated="true"
+                 debounce="500" (ionChange)="searchFollowing(followingBox.value)">
+  </ion-searchbar>
   <!-- Following list -->
   <ion-list *ngIf="followingShow">
     <ion-list-header *ngIf="following.length === 0">
@@ -42,7 +72,22 @@
     <ion-list-header *ngIf="following.length !== 0">
       Following
     </ion-list-header>
-    <ion-item *ngFor="let user of following">
+    <ion-item *ngFor="let user of following" routerLink="/profile/{{user.id}}">
+      <ion-avatar class="user-avatar">
+        <ion-img src="../assets/img/icon.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="user-nick">{{ user.nickname }}</ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- Following search list -->
+  <ion-list *ngIf="displayFollowingSearch">
+    <ion-list-header *ngIf="followingSearch.length === 0">
+      Loading Users...
+    </ion-list-header>
+    <ion-list-header *ngIf="followingSearch.length !== 0">
+      Following
+    </ion-list-header>
+    <ion-item *ngFor="let user of followingSearch" routerLink="/profile/{{user.id}}">
       <ion-avatar class="user-avatar">
         <ion-img src="../assets/img/icon.png"></ion-img>
       </ion-avatar>
