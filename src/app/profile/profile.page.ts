@@ -5,6 +5,7 @@ import {AuthService} from '../auth/auth.service';
 import {GameService} from '../game.service';
 import {Stat} from '../stat';
 import {User} from '../user';
+import {FollowService} from '../follow.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,14 +19,15 @@ export class ProfilePage {
   private stats: Stat[];
   private voteWrong = false;
   private voteSent = false;
+  private following: boolean;
   // Constructor
   constructor( private route: ActivatedRoute,
                private userService: UserService,
                private authService: AuthService,
                private router: Router,
-               private gameService: GameService
+               private gameService: GameService,
+               private followService: FollowService
   ) {}
-
   // Refresh current user every time you enter the page
   // noinspection JSUnusedGlobalSymbols
   async ionViewDidEnter()  {
@@ -39,12 +41,14 @@ export class ProfilePage {
     this.stats = await this.gameService.getStatsByUser(this.user);
     this.voteWrong = false;
     this.voteSent = false;
+    this.following = await this.followService.follow(this.currentUser.id, this.user.id);
+    console.log(this.following);
   }
-
+  // Get user
   private async getUser() {
     this.user = await this.userService.getUser(this.id);
   }
-
+  // Send vote
   sendVote(value) {
     value = +value;
     if (value < 1 || value > 5) {
@@ -55,9 +59,22 @@ export class ProfilePage {
       this.voteSent = true;
     }
   }
-
-    getAge() {
-      const year = new Date();
-      return year.getFullYear() - this.user.birthYear;
-    }
+  // Calculate Age
+  getAge() {
+    const year = new Date();
+    return year.getFullYear() - this.user.birthYear;
+  }
+  // Unfollow user
+  // noinspection SpellCheckingInspection
+  async unfollow(followerId: number, followingId: number) {
+    await this.followService.removeFollowing(followerId, followingId);
+    this.following = await this.followService.follow(followerId, followingId);
+    console.log(this.following);
+  }
+  // Follow user
+  async follow(followerId: number, followingId: number) {
+    await this.followService.addFollowing(followerId, followingId);
+    this.following = await this.followService.follow(followerId, followingId);
+    console.log(this.following);
+  }
 }

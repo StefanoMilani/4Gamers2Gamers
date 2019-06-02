@@ -61,8 +61,12 @@
             Vote: <ion-input #voteBox type="number" placeholder="From 1 to 5"></ion-input>
             <ion-button (click)="sendVote(voteBox.value)">Vote!</ion-button>
           </ion-item>
-          <ion-item>
-            <ion-label>Follow / Unfollow</ion-label>
+          <ion-item *ngIf="following" (click)="unfollow(currentUser.id, user.id)">
+            <ion-label> Unfollow </ion-label>
+            <ion-icon name="remove"></ion-icon>
+          </ion-item>
+          <ion-item *ngIf="!following" (click)="follow(currentUser.id, user.id)">
+            <ion-label> Follow </ion-label>
             <ion-icon name="person-add"></ion-icon>
           </ion-item>
         </ion-list>

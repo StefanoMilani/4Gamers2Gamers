@@ -7,8 +7,6 @@
 </ion-header>
 
 <ion-content *ngIf="currentUser">
-
-
   <!-- Cover image -->
   <ion-img id="cover-image" src="../assets/img/cover.jpg"></ion-img>
   <!-- Profile image -->
@@ -23,7 +21,7 @@
     <ion-fab-button color="secondary" size="small">
       <ion-icon name="calendar"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button color="secondary" size="small">
+    <ion-fab-button color="secondary" size="small" routerLink="/following">
       <ion-icon name="people"></ion-icon>
     </ion-fab-button>
   </ion-fab>

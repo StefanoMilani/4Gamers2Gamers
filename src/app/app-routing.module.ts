@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './auth/login/login.module#LoginPageModule' },
   { path: 'profile/:id', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'games', loadChildren: './user-setting/games/games.module#GamesPageModule' },
-  { path: 'search-user', loadChildren: './search-user/search-user.module#SearchUserPageModule' }
+  { path: 'search-user', loadChildren: './search-user/search-user.module#SearchUserPageModule' },
+  { path: 'following', loadChildren: './following/following.module#FollowingPageModule' }
   ];
 @NgModule({
   imports: [

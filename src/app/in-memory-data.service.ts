@@ -1,6 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { User } from './user';
 import { Injectable } from '@angular/core';
+import {Following} from './following';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,15 @@ export class InMemoryDataService implements InMemoryDbService {
   constructor() { }
   // Overrides the genId method to ensure that a user always has an id.
   // noinspection JSUnusedGlobalSymbols
+  // @ts-ignore
+  // noinspection JSUnusedGlobalSymbols
   static genId(users: User[]): number {
     return users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 11;
+  }
+  // @ts-ignore
+  // noinspection JSUnusedGlobalSymbols
+  static genId(following: Following[]): number {
+    return following.length > 0 ? Math.max(...following.map(f => f.id)) + 1 : 1;
   }
   // Database
   createDb() {
@@ -74,12 +82,28 @@ export class InMemoryDataService implements InMemoryDbService {
       { userId: 13  , game: 'Apex Legends'  , winLoseRatio: 0.9   , matchPlayed: 122   },
       { userId: 14  , game: 'Fifa19'        , winLoseRatio: 3.88  , matchPlayed: 970   },
     ];
-    const console = [
+    const gameConsole = [
       { name: 'xBox One'},
       { name: 'Playstation4'},
       { name: 'Nintendo Switch'},
       { name: 'Mobile'}
     ];
-    return { users , games, currentUser, stats, console};
+    const following = [
+      { id: 1   ,  followerId: 11 ,   followingId: 12},
+      { id: 2   ,  followerId: 11 ,   followingId: 13},
+      { id: 3   ,  followerId: 11 ,   followingId: 14},
+      { id: 4   ,  followerId: 12 ,   followingId: 15},
+      { id: 5   ,  followerId: 13 ,   followingId: 11},
+      { id: 6   ,  followerId: 14 ,   followingId: 11},
+      { id: 7   ,  followerId: 15 ,   followingId: 12},
+      { id: 8   ,  followerId: 16 ,   followingId: 12},
+      { id: 9   ,  followerId: 17 ,   followingId: 12},
+      { id: 10  ,  followerId: 18 ,   followingId: 12},
+      { id: 11  ,  followerId: 15 ,   followingId: 11},
+      { id: 12  ,  followerId: 16 ,   followingId: 11},
+      { id: 13  ,  followerId: 17 ,   followingId: 11},
+      { id: 14  ,  followerId: 18 ,   followingId: 11}
+    ];
+    return { users , games, currentUser, stats, gameConsole, following};
   }
 }

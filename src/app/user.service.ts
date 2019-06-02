@@ -10,7 +10,7 @@ import {GameConsole} from './gameConsole';
 export class UserService {
   // API url
   private usersUrl = 'api/users';
-  private consoleUrl = 'api/console';
+  private consoleUrl = 'api/gameConsole';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
