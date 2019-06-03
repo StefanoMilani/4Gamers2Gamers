@@ -8,6 +8,20 @@
 
 <ion-content>
   <ion-list>
-    <ion-item><!-- TODO: Add notifications db to list them--></ion-item>
+    <ion-list-header *ngIf="mapEvNo.length === 0 && loadingComplete">
+      No notification to show.
+    </ion-list-header>
+    <ion-list-header *ngIf="mapEvNo.length === 0 && !loadingComplete">
+      LOADING...
+    </ion-list-header>
+    <ion-list-header *ngIf="mapEvNo.length !== 0">
+      Notifications
+    </ion-list-header>
+    <ion-item *ngFor="let elem of mapEvNo" (click)="clickNotification(elem)">
+      <ion-label>
+        You have been invited to {{elem[0].name}}
+      </ion-label>
+    </ion-item>
   </ion-list>
+
 </ion-content>
