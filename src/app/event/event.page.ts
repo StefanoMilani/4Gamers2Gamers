@@ -19,6 +19,7 @@ export class EventPage {
   users: User[] = [];
   isParticipant: boolean;
   showParts: boolean;
+  loadingComplete = false;
 
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
@@ -48,6 +49,7 @@ export class EventPage {
   }
   // show participants
   async showParticipants() {
+    this.loadingComplete = false;
     this.showParts = true;
     let current;
     if (this.users.length === 0) {
@@ -58,6 +60,7 @@ export class EventPage {
         }
       }
     }
+    this.loadingComplete = true;
   }
   // Hide participants
   hideParticipants() {

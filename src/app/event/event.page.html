@@ -79,7 +79,10 @@
     Hide participants!
   </ion-button>
   <ion-list *ngIf="showParts">
-    <ion-list-header *ngIf="users.length === 0">
+    <ion-list-header *ngIf="users.length === 0 && loadingComplete === true">
+      No participants.
+    </ion-list-header>
+    <ion-list-header *ngIf="users.length === 0 && !loadingComplete">
       LOADING...
     </ion-list-header>
     <ion-list-header *ngIf="users.length !== 0">

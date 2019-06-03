@@ -230,7 +230,10 @@ export class CreateEventPage implements OnInit {
       subHeader: 'Do you want to participate?',
       buttons: [
         {
-          text: 'No'
+          text: 'No',
+          handler: _ => {
+            this.secondAlert();
+          }
         },
         {
           text: 'Yes',
@@ -241,8 +244,11 @@ export class CreateEventPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+  // Second alert
+  private async secondAlert() {
     // noinspection JSUnusedLocalSymbols,JSUnusedGlobalSymbols
-    const alert2 = await this.alert.create({
+    const alert = await this.alert.create({
       header: 'Do you want to invite players?',
       buttons: [
         {
@@ -259,7 +265,7 @@ export class CreateEventPage implements OnInit {
         }
       ]
     });
-    await alert2.present();
+    await alert.present();
   }
   // Come back to home
   private async goToHome() {
@@ -272,5 +278,6 @@ export class CreateEventPage implements OnInit {
   // Participate to event
   private async participate() {
     await this.eventService.addParticipant(this.event, this.currentUser);
+    await this.secondAlert();
   }
 }
