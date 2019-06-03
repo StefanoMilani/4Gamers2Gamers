@@ -1,0 +1,67 @@
+<ion-header *ngIf="team">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{team.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="team">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Welcome to the {{team.name}} page.</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Platform: {{team.platform}}</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Game: {{team.game}}</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Nationality: {{team.nationality}}</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button *ngIf="!isMember" expand="block" color="success" (click)="alertJoin()">
+    JOIN US!
+  </ion-button>
+  <ion-button *ngIf="isMember" color="danger" (click)="alertLeave()">
+    Leave team
+  </ion-button>
+  <ion-button *ngIf="!show" expand="block" (click)="showMembers()">
+    Show members!
+  </ion-button>
+  <ion-button *ngIf="show" expand="block" (click)="hideMembers()">
+    Hide members!
+  </ion-button>
+  <ion-list *ngIf="show">
+    <ion-list-header *ngIf="users.length === 0 && !loadingComplete">
+      LOADING...
+    </ion-list-header>
+    <ion-list-header *ngIf="users.length === 0 && loadingComplete">
+      No members
+    </ion-list-header>
+    <ion-item *ngFor="let user of users" routerLink='/profile/{{user.id}}'>
+      <ion-avatar class="user-avatar">
+        <ion-img src="../assets/img/icon.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="user-nick">{{ user.nickname }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

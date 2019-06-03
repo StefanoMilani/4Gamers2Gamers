@@ -5,6 +5,8 @@ import {Following} from './following';
 import {Event} from './event';
 import {Participant} from './participant';
 import {Notification} from './notification';
+import {Team} from './team';
+import {Member} from './member';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +39,16 @@ export class InMemoryDataService implements InMemoryDbService {
   // noinspection JSUnusedGlobalSymbols
   static genId(notifications: Notification[]): number {
     return notifications.length > 0 ? Math.max(...notifications.map(notification => notification.id)) + 1 : 1;
+  }
+  // @ts-ignore
+  // noinspection JSUnusedGlobalSymbols
+  static genId(teams: Team[]): number {
+    return teams.length > 0 ? Math.max(...teams.map(team => team.id)) + 1 : 1;
+  }
+  // @ts-ignore
+  // noinspection JSUnusedGlobalSymbols
+  static genId(members: Member[]): number {
+    return members.length > 0 ? Math.max(...members.map(member => member.id)) + 1 : 1;
   }
   // Database
   createDb() {
@@ -171,6 +183,52 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 5  , userId: 13 , eventId: 5},
       {id: 6  , userId: 11 , eventId: 4},
     ];
-    return { users , games, currentUser, stats, gameConsole, following, events, participants, notifications};
+    const teams = [
+      {
+        id:  1 , name: 'Team1'   , game: 'Fifa19'             ,
+        platform: 'xBox One'  ,   nationality: 'Italy'
+      },
+      {
+        id:  2 , name: 'Team2'   , game: 'Fortnite'           ,
+        platform: 'xBox One'  ,   nationality: 'Italy'
+      },
+      {
+        id:  3 , name: 'Team3'   , game: 'Apex Legends'       ,
+        platform: 'xBox One'  ,   nationality: 'Italy'
+      },
+      {
+        id:  4 , name: 'Team4'   , game: 'League of Legends'  ,
+        platform: 'xBox One'  ,   nationality: 'Italy'
+      },
+    ];
+    const members = [
+      {
+        id: 1 , userId: 11 , teamId: 1
+      },
+      {
+        id: 2 , userId: 12 , teamId: 1
+      },
+      {
+        id: 3 , userId: 13 , teamId: 1
+      },
+      {
+        id: 4 , userId: 14 , teamId: 1
+      },
+      {
+        id: 5 , userId: 15 , teamId: 2
+      },
+      {
+        id: 6 , userId: 16 , teamId: 3
+      },
+      {
+        id: 7 , userId: 17 , teamId: 4
+      }
+    ];
+    return {
+      users , games, currentUser, stats,
+      gameConsole, following,
+      events, participants,
+      notifications, teams, members
+    };
   }
 }

@@ -68,6 +68,19 @@
       </ion-avatar>
       <ion-label class="user-nick">{{ user.nickname }}</ion-label>
     </ion-item>
+    <!-- Team list -->
+    <ion-list-header *ngIf="teamsSearch.length === 0" class="no-item-to-display">
+      <ion-label>No event to display.</ion-label>
+    </ion-list-header>
+    <ion-list-header *ngIf="teamsSearch.length > 0">
+      <ion-label>Teams</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let team of teamsSearch" routerLink='/team/{{team.id}}'>
+      <ion-avatar class="event-icon">
+        <ion-img src="../assets/img/team.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="team-name">{{ team.name }}</ion-label>
+    </ion-item>
     <!-- Event list -->
     <ion-list-header *ngIf="eventsSearch.length === 0" class="no-item-to-display">
       <ion-label>No event to display.</ion-label>
@@ -82,8 +95,4 @@
       <ion-label class="event-name">{{ event.name }}</ion-label>
     </ion-item>
   </ion-list>
-  <!-- Team list -->
-  <!-- TODO: add team list -->
-
-  <!-- TODO: add event list -->
 </ion-content>
