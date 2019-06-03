@@ -13,7 +13,9 @@ const routes: Routes = [
   { path: 'profile/:id', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'games', loadChildren: './user-setting/games/games.module#GamesPageModule' },
   { path: 'search-user', loadChildren: './search-user/search-user.module#SearchUserPageModule' },
-  { path: 'following', loadChildren: './following/following.module#FollowingPageModule' }
+  { path: 'following', loadChildren: './following/following.module#FollowingPageModule' },
+  { path: 'event/:id', loadChildren: './event/event.module#EventPageModule' },
+  { path: 'my-events', loadChildren: './my-events/my-events.module#MyEventsPageModule' }
   ];
 @NgModule({
   imports: [

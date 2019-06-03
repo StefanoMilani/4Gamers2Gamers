@@ -2,6 +2,8 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { User } from './user';
 import { Injectable } from '@angular/core';
 import {Following} from './following';
+import {Event} from './event';
+import {Participant} from './participant';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,16 @@ export class InMemoryDataService implements InMemoryDbService {
   // noinspection JSUnusedGlobalSymbols
   static genId(following: Following[]): number {
     return following.length > 0 ? Math.max(...following.map(f => f.id)) + 1 : 1;
+  }
+  // @ts-ignore
+  // noinspection JSUnusedGlobalSymbols
+  static genId(events: Event[]): number {
+    return events.length > 0 ? Math.max(...events.map(event => event.id)) + 1 : 1;
+  }
+  // @ts-ignore
+  // noinspection JSUnusedGlobalSymbols
+  static genId(partecipants: Participant[]): number {
+    return partecipants.length > 0 ? Math.max(...partecipants.map(partecipant => partecipant.id)) + 1 : 1;
   }
   // Database
   createDb() {
@@ -104,6 +116,47 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 13  ,  followerId: 17 ,   followingId: 11},
       { id: 14  ,  followerId: 18 ,   followingId: 11}
     ];
-    return { users , games, currentUser, stats, gameConsole, following};
+    const events = [
+      {
+        id: 1    , name: 'Fifa Tournament'    ,   game: ''  ,   platform: ''   ,
+        team: false   ,   online:   true  ,
+        date: ''      ,   hour: ''
+      },
+      {
+        id: 2    , name: 'Fortnite Tournament'    ,   game: ''  ,   platform: ''   ,
+        team: false   ,   online:   true  ,
+        date: ''      ,   hour: ''
+      },
+      {
+        id: 3    , name: 'CoD Tournament'    ,   game: ''  ,   platform: ''   ,
+        team: true   ,   online:   true  ,
+        date: ''      ,   hour: ''
+      },
+      {
+        id: 4    , name: 'Apex Tournament'    ,   game: ''  ,   platform: ''   ,
+        team: false   ,   online:   true  ,
+        date: ''      ,   hour: ''
+      },
+      {
+        id: 5    , name: 'LoL Tournament'    ,   game: ''  ,   platform: ''   ,
+        team: true   ,   online:   true  ,
+        date: ''      ,   hour: ''
+      },
+    ];
+    const participants = [
+      { id: 1   , eventId: 1 ,  userId:  11 },
+      { id: 2   , eventId: 2 ,  userId:  11 },
+      { id: 3   , eventId: 3 ,  userId:  11 },
+      { id: 4   , eventId: 3 ,  userId:  12 },
+      { id: 5   , eventId: 4 ,  userId:  12 },
+      { id: 6   , eventId: 5 ,  userId:  13 },
+      { id: 7   , eventId: 2 ,  userId:  13 },
+      { id: 8   , eventId: 1 ,  userId:  14 },
+      { id: 9   , eventId: 1 ,  userId:  15 },
+      { id: 10  , eventId: 1 ,  userId:  16 },
+      { id: 11  , eventId: 1 ,  userId:  17 },
+      { id: 12  , eventId: 1 ,  userId:  18 },
+    ];
+    return { users , games, currentUser, stats, gameConsole, following, events, participants};
   }
 }

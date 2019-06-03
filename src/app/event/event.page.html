@@ -1,0 +1,69 @@
+<ion-header *ngIf="event">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{event.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="event">
+  <ion-item>
+    <ion-label id="event-title">
+      Welcome to {{event.name}}!
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          This event will start on {{event.date}}.
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+        At the {{event.hour}}.
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isParticipant">
+        <ion-col>
+          GET READY!!
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isParticipant">
+        <ion-col>
+          <ion-button size="small" color="warning" (click)="deletePart()">
+            Leave the event
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!isParticipant">
+        <ion-col>
+          <ion-button size="medium" color="success" expand="block" (click)="participate()">
+            JOIN NOW!
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-button *ngIf="!showParts" expand="block" (click)="showParticipants()">
+    Show participants!
+  </ion-button>
+  <ion-button *ngIf="showParts" expand="block" (click)="hideParticipants()">
+    Hide participants!
+  </ion-button>
+  <ion-list *ngIf="showParts">
+    <ion-list-header *ngIf="users.length === 0">
+      LOADING...
+    </ion-list-header>
+    <ion-list-header *ngIf="users.length !== 0">
+      Participants
+    </ion-list-header>
+    <ion-item *ngFor="let user of users" routerLink='/profile/{{user.id}}'>
+      <ion-avatar class="user-avatar">
+        <ion-img src="../assets/img/icon.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="user-nick">{{ user.nickname }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

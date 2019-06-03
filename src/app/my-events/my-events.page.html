@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>My events</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="currentUser">
+  <ion-list>
+    <ion-list-header *ngIf="events.length === 0">
+      LOADING...
+    </ion-list-header>
+    <ion-list-header *ngIf="events.length !== 0">
+      Events
+    </ion-list-header>
+    <ion-item *ngFor="let event of events" routerLink='/event/{{event.id}}'>
+      <ion-avatar class="event-icon">
+        <ion-img src="../assets/img/event.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="event-name">{{ event.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

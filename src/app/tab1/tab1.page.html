@@ -53,13 +53,14 @@
 
 <!-- Search result -->
 <ion-content *ngIf="displaySearch">
-  <!-- User list -->
-  <ion-label *ngIf="usersSearch.length === 0" class="no-item-to-display">
-    No gamer to display.
-  </ion-label>
-  <ion-list *ngIf="usersSearch.length > 0">
-    <ion-list-header>
-      <ion-label class="list-header">Gamers</ion-label>
+  <!-- Search list -->
+  <ion-list>
+    <!-- User list -->
+    <ion-list-header *ngIf="usersSearch.length === 0" class="no-item-to-display">
+      <ion-label>No gamer to display.</ion-label>
+    </ion-list-header>
+    <ion-list-header *ngIf="usersSearch.length > 0">
+      <ion-label>Gamers</ion-label>
     </ion-list-header>
     <ion-item *ngFor="let user of usersSearch" routerLink='/profile/{{user.id}}'>
       <ion-avatar class="user-avatar">
@@ -67,9 +68,22 @@
       </ion-avatar>
       <ion-label class="user-nick">{{ user.nickname }}</ion-label>
     </ion-item>
+    <!-- Event list -->
+    <ion-list-header *ngIf="eventsSearch.length === 0" class="no-item-to-display">
+      <ion-label>No event to display.</ion-label>
+    </ion-list-header>
+    <ion-list-header *ngIf="eventsSearch.length > 0">
+      <ion-label>Events</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let event of eventsSearch" routerLink='/event/{{event.id}}'>
+      <ion-avatar class="event-icon">
+        <ion-img src="../assets/img/event.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="event-name">{{ event.name }}</ion-label>
+    </ion-item>
   </ion-list>
   <!-- Team list -->
   <!-- TODO: add team list -->
-  <!-- Event list -->
+
   <!-- TODO: add event list -->
 </ion-content>
