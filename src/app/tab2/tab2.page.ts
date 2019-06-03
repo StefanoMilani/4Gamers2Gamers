@@ -27,6 +27,7 @@ export class Tab2Page {
   // Refresh current user every time you enter the page
   // noinspection JSUnusedGlobalSymbols
   async ionViewDidEnter() {
+    this.loadingComplete = false;
     this.mapEvNo = [];
     this.currentUser = await this.authService.checkLogin();
     this.notifications = await this.notificationService.getUserNotif(this.currentUser);

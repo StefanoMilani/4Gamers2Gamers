@@ -164,12 +164,12 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 12  , eventId: 1 ,  userId:  18 },
     ];
     const notifications = [
-      {id: 1  , userId: 11 , eventId: 1},
+      {id: 1  , userId: 11 , eventId: 5},
       {id: 2  , userId: 12 , eventId: 1},
       {id: 3  , userId: 13 , eventId: 1},
       {id: 4  , userId: 14 , eventId: 1},
-      {id: 5  , userId: 11 , eventId: 2},
-      {id: 6  , userId: 11 , eventId: 3},
+      {id: 5  , userId: 13 , eventId: 5},
+      {id: 6  , userId: 11 , eventId: 4},
     ];
     return { users , games, currentUser, stats, gameConsole, following, events, participants, notifications};
   }
