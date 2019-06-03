@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import {Following} from './following';
 import {Event} from './event';
 import {Participant} from './participant';
+import {Notification} from './notification';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,6 @@ export class InMemoryDataService implements InMemoryDbService {
   // Constructor
   constructor() { }
   // Overrides the genId method to ensure that a user always has an id.
-  // noinspection JSUnusedGlobalSymbols
   // @ts-ignore
   // noinspection JSUnusedGlobalSymbols
   static genId(users: User[]): number {
@@ -32,6 +32,11 @@ export class InMemoryDataService implements InMemoryDbService {
   // noinspection JSUnusedGlobalSymbols
   static genId(partecipants: Participant[]): number {
     return partecipants.length > 0 ? Math.max(...partecipants.map(partecipant => partecipant.id)) + 1 : 1;
+  }
+  // @ts-ignore
+  // noinspection JSUnusedGlobalSymbols
+  static genId(notifications: Notification[]): number {
+    return notifications.length > 0 ? Math.max(...notifications.map(notification => notification.id)) + 1 : 1;
   }
   // Database
   createDb() {
@@ -158,6 +163,14 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 11  , eventId: 1 ,  userId:  17 },
       { id: 12  , eventId: 1 ,  userId:  18 },
     ];
-    return { users , games, currentUser, stats, gameConsole, following, events, participants};
+    const notifications = [
+      {id: 1  , userId: 11 , eventId: 1},
+      {id: 2  , userId: 12 , eventId: 1},
+      {id: 3  , userId: 13 , eventId: 1},
+      {id: 4  , userId: 14 , eventId: 1},
+      {id: 5  , userId: 11 , eventId: 2},
+      {id: 6  , userId: 11 , eventId: 3},
+    ];
+    return { users , games, currentUser, stats, gameConsole, following, events, participants, notifications};
   }
 }

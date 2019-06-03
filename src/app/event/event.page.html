@@ -22,7 +22,33 @@
       </ion-row>
       <ion-row>
         <ion-col>
-        At the {{event.hour}}.
+          At the {{event.hour}}.
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          Game: {{event.game}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          Platform: {{event.platform}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngIf="event.online">
+          Online!
+        </ion-col>
+        <ion-col *ngIf="!event.online">
+          We are waiting fot you at {{event.location}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngIf="event.team">
+          Team
+        </ion-col>
+        <ion-col *ngIf="!event.team">
+          Singleplayer
         </ion-col>
       </ion-row>
       <ion-row *ngIf="isParticipant">

@@ -1,10 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Search Event</ion-title>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Event</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="currentUser && !gameChoosing">
+  <!-- Error message -->
+  <ion-item color="danger" *ngIf="showErr">
+    <ion-label>You have to insert all the fields.</ion-label>
+  </ion-item>
+  <ion-item color="danger" *ngIf="locationErr">
+    <ion-label>Specify a location for LAN event.</ion-label>
+  </ion-item>
   <!-- Game -->
   <ion-item detail="true" (click)="chooseGame()">
     <ion-label>Choose game:</ion-label>
@@ -26,11 +36,11 @@
   </ion-item>
   <!-- Hour -->
   <ion-item>
-  <ion-label>Hour</ion-label>
-  <!--suppress HtmlUnknownAttribute -->
-  <ion-datetime #hourPicker display-format="HH:mm"
-                picker-format="HH:mm"
-                (ionChange)="changeHour(hourPicker)"></ion-datetime>
+    <ion-label>Hour</ion-label>
+    <!--suppress HtmlUnknownAttribute -->
+    <ion-datetime #hourPicker display-format="HH:mm"
+                  picker-format="HH:mm"
+                  (ionChange)="changeHour(hourPicker)"></ion-datetime>
   </ion-item>
   <!-- Platform -->
   <ion-item>
@@ -76,27 +86,9 @@
                debounce="500" (ionChange)="chooseLocation(locationInput)"></ion-input>
   </ion-item>
   <!-- Button -->
-  <ion-button *ngIf="!diplaySearch" expand="block" color="success" (click)="searchEvent()">
-    Start search!
+  <ion-button expand="block" color="success" (click)="eventAlert()">
+    Create the event!
   </ion-button>
-  <ion-button *ngIf="diplaySearch" expand="block" color="success" (click)="searchEvent()">
-    Refresh search
-  </ion-button>
-  <ion-list *ngIf="diplaySearch">
-    <ion-list-header *ngIf="events.length === 0">
-      No events to show.
-    </ion-list-header>
-    <ion-list-header *ngIf="events.length !== 0">
-      Events
-    </ion-list-header>
-    <ion-item *ngFor="let event of events" routerLink='/event/{{event.id}}'>
-      <ion-avatar class="event-icon">
-        <ion-img src="../assets/img/event.png"></ion-img>
-      </ion-avatar>
-      <ion-label class="event-name">{{ event.name }}</ion-label>
-    </ion-item>
-  </ion-list>
-
 </ion-content>
 
 <!-- Game choose view -->

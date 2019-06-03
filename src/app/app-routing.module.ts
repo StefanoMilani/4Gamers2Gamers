@@ -16,7 +16,9 @@ const routes: Routes = [
   { path: 'following', loadChildren: './following/following.module#FollowingPageModule' },
   { path: 'event/:id', loadChildren: './event/event.module#EventPageModule' },
   { path: 'my-events', loadChildren: './my-events/my-events.module#MyEventsPageModule' },
-  { path: 'search-event', loadChildren: './search-event/search-event.module#SearchEventPageModule' }
+  { path: 'search-event', loadChildren: './search-event/search-event.module#SearchEventPageModule' },
+  { path: 'create-event', loadChildren: './event/create-event/create-event.module#CreateEventPageModule' },
+  { path: 'invite/:id', loadChildren: './event/invite/invite.module#InvitePageModule' }
   ];
 @NgModule({
   imports: [

@@ -1,24 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../auth/auth.service';
-import {User} from '../user';
+import { Component, OnInit } from '@angular/core';
+import {User} from '../../user';
+import {Game} from '../../game';
+import {AuthService} from '../../auth/auth.service';
 import {AlertController, IonDatetime, IonInput, IonRadioGroup, PickerController} from '@ionic/angular';
-import {Game} from '../game';
-import {GameService} from '../game.service';
-import {Event} from '../event';
-import {EventService} from '../event.service';
+import {GameService} from '../../game.service';
+import {EventService} from '../../event.service';
+import {Event} from '../../event';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-search-event',
-  templateUrl: './search-event.page.html',
-  styleUrls: ['./search-event.page.scss'],
+  selector: 'app-create-event',
+  templateUrl: './create-event.page.html',
+  styleUrls: ['./create-event.page.scss'],
 })
-export class SearchEventPage implements OnInit {
+export class CreateEventPage implements OnInit {
   currentUser: User;
-  eventName = '---';
-  date = '---';
-  hour = '---';
-  gameConsole = '---';
-  game = '---';
+  eventName: string;
+  date: string;
+  hour: string;
+  gameConsole: string;
+  game: string;
   gameChoosing: boolean;
   online: boolean;
   team: boolean;
@@ -26,29 +27,35 @@ export class SearchEventPage implements OnInit {
   // Game choose utilities
   games: Game[];
   gamesMatrix = new Array<Array<Game>>();
-  // Search result
-  private events: Event[] = [];
-  private diplaySearch: boolean;
+  // Error message
+  showErr: boolean;
+  locationErr: boolean;
+  private event: Event;
   // Constructor
   constructor(private authService: AuthService,
               private picker: PickerController,
               private alert: AlertController,
               private gameService: GameService,
-              private eventService: EventService
+              private eventService: EventService,
+              private router: Router
   ) { }
   // OnInit
   async ngOnInit() {
     this.games = await this.gameService.getGames();
     this.createGameMatrix();
+    this.eventName = '---';
+    this.date = '---';
+    this.hour = '---';
+    this.gameConsole = '---';
+    this.game = '---';
   }
   // Refresh current user every time you enter the page
   // noinspection JSUnusedGlobalSymbols
   async ionViewDidEnter() {
     this.currentUser = await this.authService.checkLogin();
     this.gameChoosing = false;
-    this.online = true;
-    this.team = true;
-    this.diplaySearch = false;
+    this.showErr = false;
+    this.locationErr = false;
   }
   // Change data
   changeData(dataPicker: IonDatetime) {
@@ -134,55 +141,35 @@ export class SearchEventPage implements OnInit {
     this.game = '---';
     this.gameChoosing = false;
   }
-  // Search event
-  async searchEvent() {
-    this.diplaySearch = true;
-    // Name
-    if (this.eventName !== '---') {
-      this.events = await this.eventService.getEventsByName(this.eventName);
-    } else {
-      this.events = await this.eventService.getEvents();
+  // Create event alert
+  // Alert on event creation
+  async eventAlert() {
+    if (this.eventName === '---' || this.date === '---' || this.hour === '---' || this.gameConsole === '---' || this.game === '---') {
+      this.showErr = true;
+      return;
     }
-    // Game
-    if (this.game !== '---') {
-      this.events = this.events.filter(event => {
-        return event.game === this.game;
-      });
+    if (this.online === false && this.location === '---') {
+      this.locationErr = true;
+      return ;
     }
-    // Platform
-    if (this.gameConsole !== '---') {
-      this.events = this.events.filter(event => {
-        return event.platform === this.gameConsole;
-      });
-    }
-    // Date
-    if (this.date !== '---') {
-      this.events = this.events.filter(event => {
-        return event.date === this.date;
-      });
-    }
-    // Hour
-    if (this.hour !== '---') {
-      this.events = this.events.filter(event => {
-        return event.hour === this.hour;
-      });
-    }
-    // Online
-    this.events = this.events.filter( event => {
-      return event.online === this.online;
+    // noinspection JSUnusedLocalSymbols,JSUnusedGlobalSymbols
+    const alert = await this.alert.create({
+      header: 'You are creating',
+      subHeader: this.eventName,
+      message: 'Are You Sure?',
+      buttons: [
+        {text: 'Cancel'},
+        {
+          text: 'Confirm',
+          handler: _ => {
+            this.createEvent();
+          }
+        }
+      ]
     });
-    // Team
-    this.events = this.events.filter( event => {
-      return event.team === this.team;
-    });
-    // Location
-    if (this.online === false && this.location !== '---') {
-      this.events = this.events.filter(event => {
-        return this.location === event.location;
-      });
-    }
+    await alert.present();
   }
-// MARK: Private methods
+  // MARK: Private methods
   private createGameMatrix() {
     let j = 0;
     for ( let i = 0; i < this.games.length; i += 2 ) {
@@ -225,5 +212,65 @@ export class SearchEventPage implements OnInit {
     } else {
       this.eventName = nameInput.value;
     }
+  }
+  // Create event
+  private async createEvent() {
+    this.event = await this.eventService.addEvent({
+      name: this.eventName,
+      platform: this.gameConsole,
+      team: this.team,
+      online: this.online,
+      location: this.location,
+      date: this.date,
+      hour: this.hour
+    } as Event);
+    // noinspection JSUnusedLocalSymbols,JSUnusedGlobalSymbols
+    const alert = await this.alert.create({
+      header: 'Event successfully created',
+      subHeader: 'Do you want to participate?',
+      buttons: [
+        {
+          text: 'No'
+        },
+        {
+          text: 'Yes',
+          handler: _ => {
+            this.participate();
+          }
+        }
+      ]
+    });
+    await alert.present();
+    // noinspection JSUnusedLocalSymbols,JSUnusedGlobalSymbols
+    const alert2 = await this.alert.create({
+      header: 'Do you want to invite players?',
+      buttons: [
+        {
+          text: 'No',
+          handler: _ => {
+            this.goToHome();
+          }
+        },
+        {
+          text: 'Yes',
+          handler: _ => {
+            this.goToInvite();
+          }
+        }
+      ]
+    });
+    await alert2.present();
+  }
+  // Come back to home
+  private async goToHome() {
+    await this.router.navigate(['/home']);
+  }
+  // Go to invite player
+  private async goToInvite() {
+    await this.router.navigate([`/invite/${this.event.id}`]);
+  }
+  // Participate to event
+  private async participate() {
+    await this.eventService.addParticipant(this.event, this.currentUser);
   }
 }
