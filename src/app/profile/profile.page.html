@@ -51,11 +51,8 @@
     <ion-card>
       <ion-card-content>
         <ion-list>
-          <ion-item detail="true">
-            Request to join his team.
-          </ion-item>
-          <ion-item detail="true">
-            Request him to join your team.
+          <ion-item routerLink="/team-list/{{user.id}}">
+            View {{user.nickname}}'s teams
           </ion-item>
           <ion-item>
             Vote: <ion-input #voteBox type="number" placeholder="From 1 to 5"></ion-input>

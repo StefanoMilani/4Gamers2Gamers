@@ -182,7 +182,7 @@ export class SearchEventPage implements OnInit {
       });
     }
   }
-// MARK: Private methods
+  // MARK: Private methods
   private createGameMatrix() {
     let j = 0;
     for ( let i = 0; i < this.games.length; i += 2 ) {
@@ -192,10 +192,7 @@ export class SearchEventPage implements OnInit {
   }
   // Change console
   private changeConsole(gameConsole) {
-    const selectedValue = gameConsole.Console.text;
-    if (selectedValue === '---') {  return; }
-    this.gameConsole = selectedValue;
-    console.log(this.gameConsole);
+    this.gameConsole = gameConsole.Console.text;
   }
   // Change game
   private changeGame(game: Game) {

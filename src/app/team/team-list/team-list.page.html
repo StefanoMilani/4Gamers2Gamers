@@ -1,0 +1,29 @@
+<ion-header *ngIf="currentUser && user">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="id === currentUser.id">Your teams</ion-title>
+    <ion-title *ngIf="id !== currentUser.id">{{user.nickname}}' teams</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="currentUser && user">
+  <ion-list>
+    <ion-list-header *ngIf="teams.length === 0 && !loadingComplete">
+      LOADING...
+    </ion-list-header>
+    <ion-list-header *ngIf="teams.length === 0 && loadingComplete">
+      No team to show
+    </ion-list-header>
+    <ion-list-header *ngIf="teams.length > 0">
+      Teams
+    </ion-list-header>
+    <ion-item *ngFor="let team of teams" routerLink="/team/{{team.id}}">
+      <ion-avatar class="event-icon">
+        <ion-img src="../assets/img/team.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="team-name">{{ team.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -48,18 +48,20 @@
   </ion-grid>
   <!-- Actions -->
   <div class="action-div">
-
     <ion-card>
       <ion-card-content>
         <ion-list>
-          <ion-item detail="true">
+          <ion-item detail="true" routerLink="/create-team">
             Create a team.
           </ion-item>
-          <ion-item detail="true">
+          <ion-item detail="true" routerLink="/team-list/{{currentUser.id}}">
+            My teams
+          </ion-item>
+          <ion-item detail="true" routerLink="/search-team">
             Search for a Team.
           </ion-item>
-          <ion-item detail="true">
-            Search for a F/A.
+          <ion-item detail="true" routerLink="/search-user">
+            Search for a player.
           </ion-item>
           <ion-item detail="true" routerLink="/create-event">
             Create an event

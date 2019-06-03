@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Search teams</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="currentUser && !gameChoosing">
+  <ion-item *ngIf="showErr" color="danger">
+    Insert at least one field.
+  </ion-item>
+  <!-- Game -->
+  <ion-item detail="true" (click)="chooseGame()">
+    <ion-label>Choose game:</ion-label>
+    <ion-label *ngIf="game !== '---'">{{game}}</ion-label>
+  </ion-item>
+  <!-- Name -->
+  <ion-item>
+    <ion-label>Name:</ion-label>
+    <ion-input #nameInput placeholder="Insert name"
+               debounce="500" (ionChange)="chooseName(nameInput)"></ion-input>
+  </ion-item>
+  <!-- Platform -->
+  <ion-item>
+    <ion-label>Choose the platform:</ion-label>
+    <ion-button (click)="openConsolePicker()">{{gameConsole}}</ion-button>
+  </ion-item>
+  <!-- Nationality -->
+  <ion-item>
+    <ion-label>
+      Choose nationality:
+    </ion-label>
+    <ion-button (click)="openCountryPicker()">
+      {{country}}
+    </ion-button>
+  </ion-item>
+  <!-- Buttons -->
+  <ion-button *ngIf="!showSearch" expand="block" (click)="searchTeams()">
+    Start search!
+  </ion-button>
+  <ion-button *ngIf="showSearch" expand="block" (click)="searchTeams()">
+    Refresh search!
+  </ion-button>
+  <!-- Search result -->
+  <ion-list *ngIf="showSearch">
+    <ion-list-header *ngIf="teams.length === 0 && !loadingComplete">
+      LOADING...
+    </ion-list-header>
+    <ion-list-header *ngIf="teams.length === 0 && loadingComplete">
+      No teams to show.
+    </ion-list-header>
+    <ion-list-header *ngIf="teams.length > 0">
+      Teams
+    </ion-list-header>
+    <ion-item *ngFor="let team of teams" routerLink="/team/{{team.id}}">
+      <ion-avatar class="event-icon">
+        <ion-img src="../assets/img/team.png"></ion-img>
+      </ion-avatar>
+      <ion-label class="team-name">{{ team.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!-- Game choose view -->
+<ion-content *ngIf="gameChoosing && games" >
+  <ion-card id="game-choosing">
+    <ion-button size="small" color="warning" (click)="deselectGame()">
+      <ion-label>Deselect game!</ion-label>
+    </ion-button>
+    <ion-button size="small" color="danger"
+                id="close-game-card"
+                (click)="closeGameChoice()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-card-header>
+      Choose the game by touching the images.
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor="let elem of gamesMatrix">
+          <ion-col>
+            <ion-img *ngIf="elem[0]" id='{{elem[0].name}}'
+                     src="assets/games/{{elem[0].name}}.jpg" class="game-img"
+                     (click)='alertGame(elem[0])'>
+            </ion-img>
+          </ion-col>
+          <ion-col>
+            <ion-img *ngIf="elem[1]" id='{{elem[1].name}}'
+                     src="assets/games/{{elem[1].name}}.jpg" class="game-img"
+                     (click)='alertGame(elem[1])'>
+            </ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

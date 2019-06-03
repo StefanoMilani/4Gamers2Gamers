@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlertController, IonInput, IonToggle, PickerController} from '@ionic/angular';
 import {UserService} from '../user.service';
 import {User} from '../user';
@@ -291,21 +291,11 @@ export class SearchUserPage implements OnInit {
   }
   // Change console
   private changeConsole(gameConsole) {
-    const selectedValue = gameConsole.Console.text;
-    if (selectedValue === '---') {
-      this.gameConsole = '---';
-      return;
-    }
-    this.gameConsole = selectedValue;
+    this.gameConsole = gameConsole.Console.text;
   }
   // Change country
   private changeCountry(country) {
-    const selectedValue = country.Country.text;
-    if (selectedValue === '---') {
-      this.country = '---';
-      return;
-    }
-    this.country = selectedValue;
+    this.country = country.Country.text;
   }
   // Change game
   private changeGame(game: Game) {

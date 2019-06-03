@@ -24,10 +24,15 @@ export class TeamService {
     const url = `${this.teamUrl}/${id}`;
     return this.http.get<Team>(url).toPromise();
   }
-  // Get tem by name
+  // Get team by name
   async getTeamByName(name: string): Promise<Team[]> {
     const url = `${this.teamUrl}/?name=${name}`;
     return this.http.get<Team[]>(url).toPromise();
+  }
+  // Get teams by user
+  async getTeamsByUser(user: User): Promise<Member[]> {
+    const url = `${this.memberUrl}/?userId=${user.id}`;
+    return this.http.get<Member[]>(url).toPromise();
   }
   // Add team
   async addTeam(team: Team): Promise<Team> {

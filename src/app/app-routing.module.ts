@@ -19,7 +19,10 @@ const routes: Routes = [
   { path: 'search-event', loadChildren: './search-event/search-event.module#SearchEventPageModule' },
   { path: 'create-event', loadChildren: './event/create-event/create-event.module#CreateEventPageModule' },
   { path: 'invite/:id', loadChildren: './event/invite/invite.module#InvitePageModule' },
-  { path: 'team/:id', loadChildren: './team/team.module#TeamPageModule' }
+  { path: 'team/:id', loadChildren: './team/team.module#TeamPageModule' },
+  { path: 'search-team', loadChildren: './search-team/search-team.module#SearchTeamPageModule' },
+  { path: 'create-team', loadChildren: './team/create-team/create-team.module#CreateTeamPageModule' },
+  { path: 'team-list/:id', loadChildren: './team/team-list/team-list.module#TeamListPageModule' }
   ];
 @NgModule({
   imports: [
