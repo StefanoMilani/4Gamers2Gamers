@@ -4,6 +4,7 @@ export class Event {
   platform: string;
   team: boolean;
   online: boolean;
+  location: string;
   date: string;
   hour: string;
 }

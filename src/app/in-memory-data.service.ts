@@ -50,7 +50,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       { id: 14, nickname: 'Edoardo'   , password: 'pass' , birthYear: 1995 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
-        favoriteGame: 'Fortnite', gameConsole: 'xBox One'
+        favoriteGame: 'Fortnite', gameConsole: 'PC'
       },
       { id: 15, nickname: 'Magneta'   , password: 'pass' , birthYear: 1999 ,
         country: 'Italy'  , email: 'example@foo.com'     ,
@@ -98,7 +98,8 @@ export class InMemoryDataService implements InMemoryDbService {
       { name: 'xBox One'},
       { name: 'Playstation4'},
       { name: 'Nintendo Switch'},
-      { name: 'Mobile'}
+      { name: 'Mobile'},
+      { name: 'PC'}
     ];
     const following = [
       { id: 1   ,  followerId: 11 ,   followingId: 12},
@@ -118,29 +119,29 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
     const events = [
       {
-        id: 1    , name: 'Fifa Tournament'    ,   game: ''  ,   platform: ''   ,
-        team: false   ,   online:   true  ,
-        date: ''      ,   hour: ''
+        id: 1    , name: 'Fifa Tournament'    ,   game: 'Fifa19'  ,   platform: 'xBox One'   ,
+        team: false   ,   online:   true  ,   location: ''  ,
+        date: '2019-08-10'      ,   hour: '20:20'
       },
       {
-        id: 2    , name: 'Fortnite Tournament'    ,   game: ''  ,   platform: ''   ,
-        team: false   ,   online:   true  ,
-        date: ''      ,   hour: ''
+        id: 2    , name: 'Fortnite Tournament'    ,   game: 'Fortnite'  ,   platform: 'Playstation4'   ,
+        team: false   ,   online:   true  ,   location: ''  ,
+        date: '2019-07-22'      ,   hour: '21:30'
       },
       {
-        id: 3    , name: 'CoD Tournament'    ,   game: ''  ,   platform: ''   ,
-        team: true   ,   online:   true  ,
-        date: ''      ,   hour: ''
+        id: 3    , name: 'CoD Tournament'    ,   game: 'Call of Duty'  ,   platform: 'Playstation4'   ,
+        team: true   ,   online:   false  ,   location: 'Sabaudia'  ,
+        date: '2019-06-30'      ,   hour: '01:30'
       },
       {
-        id: 4    , name: 'Apex Tournament'    ,   game: ''  ,   platform: ''   ,
-        team: false   ,   online:   true  ,
-        date: ''      ,   hour: ''
+        id: 4    , name: 'Apex Tournament'    ,   game: 'Apex Legends'  ,   platform: 'Playstation4'   ,
+        team: false   ,   online:   true  ,   location: ''  ,
+        date: '2019-09-10'      ,   hour: '17:00'
       },
       {
-        id: 5    , name: 'LoL Tournament'    ,   game: ''  ,   platform: ''   ,
-        team: true   ,   online:   true  ,
-        date: ''      ,   hour: ''
+        id: 5    , name: 'LoL Tournament'    ,   game: 'League of Legends'  ,   platform: 'PC'   ,
+        team: true   ,   online:   true  ,   location: ''  ,
+        date: '2019-10-10'      ,   hour: '22.45'
       },
     ];
     const participants = [

@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'search-user', loadChildren: './search-user/search-user.module#SearchUserPageModule' },
   { path: 'following', loadChildren: './following/following.module#FollowingPageModule' },
   { path: 'event/:id', loadChildren: './event/event.module#EventPageModule' },
-  { path: 'my-events', loadChildren: './my-events/my-events.module#MyEventsPageModule' }
+  { path: 'my-events', loadChildren: './my-events/my-events.module#MyEventsPageModule' },
+  { path: 'search-event', loadChildren: './search-event/search-event.module#SearchEventPageModule' }
   ];
 @NgModule({
   imports: [

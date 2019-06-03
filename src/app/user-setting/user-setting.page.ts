@@ -169,6 +169,10 @@ export class UserSettingPage {
               text: 'Mobile',
               value: 4
             },
+            {
+              text: 'PC',
+              value: 5
+            },
           ]
         },
       ]

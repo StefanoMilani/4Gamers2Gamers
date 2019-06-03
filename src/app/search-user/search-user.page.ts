@@ -102,6 +102,10 @@ export class SearchUserPage implements OnInit {
               text: 'Mobile',
               value: 4
             },
+            {
+              text: 'PC',
+              value: 5
+            },
           ]
         },
       ]
