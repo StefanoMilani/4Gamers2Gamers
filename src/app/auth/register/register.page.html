@@ -20,14 +20,38 @@
               <ion-input  name="nickname" type="text" placeholder="Nickname" ngModel required></ion-input>
             </ion-item>
             <ion-item>
+              <ion-input  name="email" type="email" placeholder="Email" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input  name="birthYear" type="number" placeholder="Birth year" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
               <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
             </ion-item>
             <ion-item>
               <ion-input name="confirm" type="password" placeholder="Confirm your password" ngModel required></ion-input>
             </ion-item>
+            <ion-item>
+              <ion-label>
+                Choose platform:
+              </ion-label>
+              <ion-button (click)="openConsolePicker()">
+                {{gameConsole}}
+              </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                Choose nationality:
+              </ion-label>
+              <ion-button (click)="openCountryPicker()">
+                {{country}}
+              </ion-button>
+            </ion-item>
           </div>
           <div padding>
-            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+            <ion-button  size="large" type="submit"
+                         [disabled]="form.invalid || gameConsole === '---' || country === '---'"
+                         expand="block">Register</ion-button>
           </div>
         </ion-col>
       </ion-row>

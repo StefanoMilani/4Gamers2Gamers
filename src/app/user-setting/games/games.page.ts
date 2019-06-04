@@ -5,6 +5,7 @@ import {User} from '../../user';
 import {Game} from '../../game';
 import {AlertController, IonImg} from '@ionic/angular';
 import {UserService} from '../../user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-games',
@@ -20,7 +21,8 @@ export class GamesPage {
   constructor(private authService: AuthService,
               private userService: UserService,
               private gameService: GameService,
-              private alert: AlertController
+              private alert: AlertController,
+              private router: Router
   ) { }
   // Refresh current user every time you enter the page
   // noinspection JSUnusedGlobalSymbols
