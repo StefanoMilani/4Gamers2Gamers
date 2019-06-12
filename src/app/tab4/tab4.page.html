@@ -1,9 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab4</ion-title>
+    <ion-title>Create</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-grid style="height: 100%">
+      <ion-row>
+       <ion-card routerLink="/create-team" style="width:100%">
+         <ion-card-header>
+           <ion-card-title>Create a Team</ion-card-title>
+         </ion-card-header>
+         <ion-card-content>
+           Create your own team.
+         </ion-card-content>
+       </ion-card>
+      </ion-row>
 
+      <ion-row>
+       <ion-card routerLink="/create-event">
+         <ion-card-header>
+           <ion-card-title>Create an Event</ion-card-title>
+         </ion-card-header>
+         <ion-card-content>
+           Create your event and invite all friends you want.
+         </ion-card-content>
+       </ion-card>
+      </ion-row>
+  </ion-grid>
 </ion-content>
