@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'team/:id', loadChildren: './team/team.module#TeamPageModule' },
   { path: 'search-team', loadChildren: './search-team/search-team.module#SearchTeamPageModule' },
   { path: 'create-team', loadChildren: './team/create-team/create-team.module#CreateTeamPageModule' },
-  { path: 'team-list/:id', loadChildren: './team/team-list/team-list.module#TeamListPageModule' }
+  { path: 'team-list/:id', loadChildren: './team/team-list/team-list.module#TeamListPageModule' },
+  { path: 'tab4', loadChildren: './tab4/tab4.module#Tab4PageModule' }
   ];
 @NgModule({
   imports: [
