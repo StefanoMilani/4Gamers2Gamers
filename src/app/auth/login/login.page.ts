@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
           password: '',
         });
         await this.authService.setCurrentUser(user);
-        await this.router.navigate(['/tabs/tab1']);
+        await this.router.navigate(['/tabs/tab3']);
         return;
       }
     }
