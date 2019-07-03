@@ -24,6 +24,7 @@
   <ion-item>
     <ion-label>Name:</ion-label>
     <ion-input #nameInput placeholder="Insert name"
+               [value]="eventName==='---' ? '':eventName"
                debounce="500" (ionChange)="chooseName(nameInput)"></ion-input>
   </ion-item>
   <!-- Date -->
@@ -32,6 +33,7 @@
     <!--suppress HtmlUnknownAttribute -->
     <ion-datetime #dataPicker display-format="MMM DD, YYYY"
                   picker-format="MMMM DD, YYYY" placeholder=""
+                  [value]="date"
                   (ionChange)="changeData(dataPicker)"></ion-datetime>
   </ion-item>
   <!-- Hour -->
@@ -40,6 +42,7 @@
     <!--suppress HtmlUnknownAttribute -->
     <ion-datetime #hourPicker display-format="HH:mm"
                   picker-format="HH:mm"
+                  [value]="dateValue"
                   (ionChange)="changeHour(hourPicker)"></ion-datetime>
   </ion-item>
   <!-- Platform -->

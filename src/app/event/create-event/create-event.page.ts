@@ -18,6 +18,7 @@ export class CreateEventPage implements OnInit {
   eventName: string;
   date: string;
   hour: string;
+  dateValue: string;
   gameConsole: string;
   game: string;
   gameChoosing: boolean;
@@ -59,11 +60,13 @@ export class CreateEventPage implements OnInit {
   }
   // Change data
   changeData(dataPicker: IonDatetime) {
+    this.dateValue = dataPicker.value;
     this.date = dataPicker.value.substr(0, 10);
     console.log(this.date);
   }
   // change hour
   changeHour(hourPicker: IonDatetime) {
+    this.dateValue = hourPicker.value;
     this.hour = hourPicker.value.substr(11, 5);
     console.log(this.hour);
   }
