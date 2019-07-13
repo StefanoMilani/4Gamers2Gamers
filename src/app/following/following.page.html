@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="followingNum && followersNum">
+<ion-content *ngIf="followingNum && followersNum && !gameChoosing">
   <ion-item>
     <ion-label id="info-label">
       Click on "Followers" or "Following" to show them.
@@ -15,11 +15,11 @@
   </ion-item>
   <!-- Follow stats -->
   <ion-grid>
-    <ion-row>
-      <ion-col (click)="showFollowers()">
+    <ion-row class="foll-row">
+      <ion-col (click)="showFollowers()" class="foll-col">
         Followers: {{followersNum.length}}
       </ion-col>
-      <ion-col (click)="showFollowing()">
+      <ion-col class="foll-col" (click)="showFollowing()">
         Following: {{followingNum.length}}
       </ion-col>
     </ion-row>
@@ -29,6 +29,38 @@
                  placeholder="Search followers..." animated="true"
                  debounce="500" (ionChange)="searchFollowers(followerBox.value)">
   </ion-searchbar>
+  <!-- Follower search params -->
+  <ion-list *ngIf="displayFollowerSearch || followerShow">
+    <ion-item detail="true" (click)="chooseGame()">
+      <ion-label>Choose game:</ion-label>
+      <ion-label *ngIf="game !== '---'">{{game}}</ion-label>
+    </ion-item>
+    <!-- Stats form -->
+    <ion-item >
+      <ion-label>
+        Win/Lose Ratio:
+      </ion-label>
+      <ion-input #winLoseBox type="number"
+                 debounce="500" (ionChange)="winLoseChange(winLoseBox)"
+                 >
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Match Played:
+      </ion-label>
+      <ion-input #matchPlayedBox type="number"
+                 debounce="500" (ionChange)="matchPlayedChange(matchPlayedBox)"
+                 >
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <!-- Search button -->
+  <ion-button *ngIf="displayFollowerSearch || followerShow"
+              color="primary" expand="block"
+              (click)="searchFollowersParams()">
+    Search!
+  </ion-button>
   <!-- Follower list -->
   <ion-list *ngIf="followerShow">
     <ion-list-header *ngIf="followers.length === 0">
@@ -64,6 +96,37 @@
                  placeholder="Search following..." animated="true"
                  debounce="500" (ionChange)="searchFollowing(followingBox.value)">
   </ion-searchbar>
+  <!-- Follower search params -->
+  <ion-list *ngIf="displayFollowingSearch || followingShow">
+    <ion-item detail="true" (click)="chooseGame()">
+      <ion-label>Choose game:</ion-label>
+      <ion-label *ngIf="game !== '---'">{{game}}</ion-label>
+    </ion-item>
+    <!-- Stats form -->
+    <ion-item >
+      <ion-label>
+        Win/Lose Ratio:
+      </ion-label>
+      <ion-input #winLoseBox type="number"
+                 debounce="500" (ionChange)="winLoseChange(winLoseBox)"
+                 >
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Match Played:
+      </ion-label>
+      <ion-input #matchPlayedBox type="number"
+                 debounce="500" (ionChange)="matchPlayedChange(matchPlayedBox)"
+                 >
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <!-- Search button -->
+  <ion-button *ngIf="displayFollowingSearch || followingShow"
+              color="primary" expand="block" (click)="searchFollowingParams()">
+    Search!
+  </ion-button>
   <!-- Following list -->
   <ion-list *ngIf="followingShow">
     <ion-list-header *ngIf="following.length === 0">
@@ -94,4 +157,40 @@
       <ion-label class="user-nick">{{ user.nickname }}</ion-label>
     </ion-item>
   </ion-list>
+</ion-content>
+
+
+<!-- Game choose view -->
+<ion-content *ngIf="gameChoosing && games" >
+  <ion-card id="game-choosing">
+    <ion-button size="small" color="warning" (click)="deselectGame()">
+      <ion-label>Deselect game!</ion-label>
+    </ion-button>
+    <ion-button size="small" color="danger"
+                id="close-game-card"
+                (click)="closeGameChoice()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-card-header>
+      Choose the game by touching the images.
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor="let elem of gamesMatrix">
+          <ion-col>
+            <ion-img *ngIf="elem[0]" id='{{elem[0].name}}'
+                     src="assets/games/{{elem[0].name}}.jpg" class="game-img"
+                     (click)='alertGame(elem[0])'>
+            </ion-img>
+          </ion-col>
+          <ion-col>
+            <ion-img *ngIf="elem[1]" id='{{elem[1].name}}'
+                     src="assets/games/{{elem[1].name}}.jpg" class="game-img"
+                     (click)='alertGame(elem[1])'>
+            </ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -3,11 +3,19 @@
   font-size: 13px;
 }
 
-ion-row{
+.foll-row{
   border: black 1px solid;
 }
 
-ion-col{
+.foll-col{
   border: black 1px solid;
   text-align: center;
+}
+.game-img{
+  height: 150px;
+}
+
+#close-game-card{
+  position: relative;
+  left: 50%;
 }
